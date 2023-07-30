@@ -1,0 +1,91 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color:rgb(62, 218, 218);
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+ */
+
+ *{
+  margin:0;
+  padding: 0;
+  box-sizing: border-box;
+  
+ }
+ body{
+  max-width: 1200px;
+  margin: 50px auto;
+  text-align: center;
+ }
+
+ ul{
+  text-align: justify;
+ }
+
+ .checks
+ {
+  display: flex;
+  align-items: center;
+  
+  width: 200px;
+  height: 50px;
+ 
+  
+ }
+ .contenedor
+ {
+  padding: auto;
+ background-color: rgb(102, 235, 235);
+ gap: 50px;
+  display: flex;
+  align-items: center;
+  width: 400px;
+  height: 50px;
+ }
+ .tachado{
+  text-decoration:line-through;
+ }
+ .botones{
+  display: flex;
+
+gap: 20px;
+
+
+ }
