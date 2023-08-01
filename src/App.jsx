@@ -13,7 +13,7 @@ function App() {
       <Header />
     <br></br>
      <div >
-      <h3>Agregar nueva tareas</h3>
+     
       
      <TaskList/>
       

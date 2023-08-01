@@ -4,20 +4,18 @@
   padding: 2rem;
   text-align: center;
   background-color:rgb(62, 218, 218);
+  align-items: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.taskList{
+  display: flex;
+
+  align-items: center;
+  box-shadow: 0 0 10px 5px;
+  padding: 20px;
+
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+
 
 @keyframes logo-spin {
   from {
@@ -34,13 +32,7 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
 
-.read-the-docs {
-  color: #888;
-}
  */
 
  *{
@@ -63,13 +55,15 @@
  {
   display: flex;
   align-items: center;
-  
-  width: 200px;
+  width: 300px;
   height: 50px;
- 
-  
  }
- .contenedor
+
+p {
+  font-size: 15px;
+}
+
+ .container
  {
   padding: auto;
  background-color: rgb(102, 235, 235);
@@ -78,14 +72,41 @@
   align-items: center;
   width: 400px;
   height: 50px;
+  box-shadow: black;
  }
- .tachado{
+ .terminada{
   text-decoration:line-through;
  }
- .botones{
+ .buttons{
   display: flex;
-
-gap: 20px;
-
+  gap: 20px;
+ }
+ .button{
+  color: rgb(17, 203, 216);
+  background-color: black;
+  width: 30px;
+  align-items: center;
+  padding: 10px;
+  height: 40px;
+ }
+ .deleteButton{
+  color: rgb(204, 49, 49);
+  background-color: black;
+  width: 30px;
+  align-items: center;
+  padding: 10px;
+  height: 40px;
+ }
+ .icon{
+  width: 10px;
+  height: 10px;
+ }
+ h2{
+  color: rgb(6, 118, 126);
+  text-decoration: double;
+ 
+ }
+ h1, h2, h3{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 
  }
