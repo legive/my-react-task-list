@@ -88,7 +88,7 @@ const completedTask=(complete2)=>{
 
 <p>Tareas:{tasklistArray.length}, Terminadas:{completed} , Pendientes:{pending}</p>
 <br></br>
-<button >Eliminar las tareas terminadas</button>
+<button className="botonGrande">Eliminar las tareas terminadas</button>
 </div>
 </div>
    

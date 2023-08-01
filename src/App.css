@@ -64,7 +64,7 @@
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   padding: 10px;
-  background-color: rgb(212, 190, 233);
+  background-color: rgb(240, 220, 231);
  
  }
  .container:hover{
@@ -100,7 +100,7 @@ p {
   display: flex;
   gap:20%;
   justify-content: center;
-  background-color: rgb(238, 131, 211);
+  background-color: rgb(219, 118, 148);
   width: 20%;
   height: 100%;
   border-top-right-radius: 10px;
@@ -140,7 +140,7 @@ p {
   width: 100%;
  }
  .icon:hover{
-  color: rgb(184, 14, 141);
+  color: rgb(240, 47, 153);
  }
 
  h3{
@@ -155,8 +155,25 @@ p {
   text-decoration: double;
 
  }
- .imagen{
-  background-color: aqua;
-  height: 60px;
-  width:50%;
+ img{
+  width:100px;
   }
+  .container
+ {
+  padding: 10px;
+
+ border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  width: 400px;
+  height: 50px;
+  box-shadow: black;
+ flex-direction: row;
+ }
+ .botonGrande{
+  font-family: 'Caveat', bold;
+  font-size: 20px;
+  background-color: rgb(219, 118, 148);
+  
+  
+ }

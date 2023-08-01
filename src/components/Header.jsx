@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import pata from './pata.png'
 
 
 
 export default function Header(){
     return(
-    <div>
+    <div className="containerHeader">
      
-        <img src="/src/componentes/img/profile.png" ></img>
-       
+     <img src={pata}></img>
 
         <h1>Mi lista de tareas</h1>
         
