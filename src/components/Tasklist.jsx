@@ -6,6 +6,7 @@ import {useState, useEffect} from "react";
 import { BsPlusCircleFill } from "react-icons/bs";
 import Task from './Task'
 import App from '../App.css'
+import Header from './Header'
 
 
 export default function Tasklist () {
@@ -56,24 +57,31 @@ const completedTask=(complete2)=>{
   return (
 
     <div className="taskList">
-      <div>
-      <h3>Agregar nueva tareas</h3>
-    <form>
-        <input style={{width:'300px', height:'20px'}}  type='text' name='taskName' placeholder='Tareas a realizar' />
-
-        <button  className="button"><BsPlusCircleFill className="icon"/></button> 
           
-    </form>
+      <div>
+      <Header />
+     
+      
+    <form >
+       
+    <div className="container">
+
+      <div className="checks"><input className="agregar" type='text' name='taskName' placeholder='Agrega una nueva tarea' /></div>
+      <div className="buttons"><BsPlusCircleFill className="icon"/></div> 
+
+      </div>  
+    </form >
+    
 
       {tasklistArray.map((task)=>
 
-  
-<div key={task} className="container">
+ 
+<div key={task} >
 
 <Task id={task.id} taskN={task.name} isComplete={task.isComplete} taskList={tasklistArray} pendingTask={pendingTask} completedTask={completedTask}/>
 
- 
-</div>
+ </div>
+
     )
 }
 

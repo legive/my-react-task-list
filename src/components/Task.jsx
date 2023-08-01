@@ -44,19 +44,23 @@ const handleCompletedPendients=()=>{
 }
 
   return (
+   
+ 
     <div className="container" >
-  
-      <div  className="checks"><p>{id}.</p><input checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(checkedStatus)}/> 
-      <p className={  `${checkedStatus? 'terminada':''}`}>{taskN}</p></div>
+ 
+      <div  className="checks" onClick={()=>checkTasks(checkedStatus)}><p>{id}.</p><input checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(checkedStatus)}/> 
+      <p className={ `${checkedStatus? 'terminada':''}`}>{taskN}</p></div>
 
     
     <div className="buttons">
-      <button  className="button"><BsPencilFill className="icon"/></button>
-      <button  className="deleteButton"><BsFillTrash3Fill className="icon"/></button>
+      <div  ><BsPencilFill className="icon" /></div>
+      <div  ><BsFillTrash3Fill className="icon"/></div>
+     </div>
+  
+
   </div>
 
-  
-  </div>
+ 
   
     )
 }
