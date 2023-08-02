@@ -31,10 +31,8 @@ export default function Tasklist () {
       settasklistArray([
         {name:'Aprender HTML', isComplete: false, id: 1},
         {name:'Aprender CSS', isComplete: false, id: 2},
-        {name:'Aprender JAVASCRIPT', isComplete: false, id: 3},
-        {name:'Aprender REACT', isComplete: false, id: 4},
-        {name:'Aprender HOOKS', isComplete: false, id: 5},
-        {name:'Aprender NODE & Npm', isComplete: false, id: 6}
+        {name:'Aprender JAVASCRIPT', isComplete: false, id: 3}
+      
       
       ])
       setPendings(tasklistArray.filter(tarea=>tarea.isComplete==false).length)
