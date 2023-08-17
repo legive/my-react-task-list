@@ -2,92 +2,95 @@
 /* eslint-disable no-unused-vars */
 //rafc para crear la estruxtura de una funcion
 
-import {useState, useEffect} from "react";
+import {useState, useEffect, useReducer, useContext} from "react";
 import { BsPlusCircleFill } from "react-icons/bs";
 import Task from './Task'
-import App from '../App.css'
 import Header from './Header'
-
+import { useActions } from "./hooks/useActions";
+import { BsPencilFill, BsFillTrash3Fill, BsPlusSquareFill } from "react-icons/bs";
 
 export default function Tasklist () {
 
-  const [tasklistArray,settasklistArray]=useState([ ])
-  const [pending, setPendings]=useState()
-  const [completed, setCompleted]=useState() 
+  const [taskNew, settaskNew]=useState("");
+  const [tasklistArray, addTask, deleteTask, updateTask]=useActions();
+  const [checkedStatus, setcheckedStatus]=useState()
 
 
- useEffect(()=>{
 
-    const taskData=window.localStorage.getItem('taskItems')
-    
-         if (taskData!=null)
-         {
-         settasklistArray(JSON.parse(taskData))
-         setPendings(tasklistArray.filter(tarea=>tarea.isComplete==false).length)
-         setCompleted(tasklistArray.filter(tarea=>tarea.isComplete==true).length)
-         }
-     else{
+ function handleAddTask()
+  {
+   
+addTask(taskNew);
 
-      settasklistArray([
-        {name:'Aprender HTML', isComplete: false, id: 1},
-        {name:'Aprender CSS', isComplete: false, id: 2},
-        {name:'Aprender JAVASCRIPT', isComplete: false, id: 3}
-      
-      
-      ])
-      setPendings(tasklistArray.filter(tarea=>tarea.isComplete==false).length)
-      setCompleted(tasklistArray.filter(tarea=>tarea.isComplete==true).length)
-     }
+settaskNew('')
+
+
+  } 
+
+  const handleDelete=(id)=>{
+  deleteTask(id)
+ 
+  }
   
-  },) 
+  const handleUpdate=(id)=>{
+      settaskNew(updateTask(id))
+  console.log(taskNew)
+  
+  } 
 
   
+ const checkTasks=(index, isComplete)=>{
+   const newState=!isComplete
+   tasklistArray[index].isComplete=newState
+   setcheckedStatus(newState)
+  
+   }
 
-const pendingTask=(pending2)=>{
-  setPendings(pending2)
-}
 
-const completedTask=(complete2)=>{
-  setCompleted(complete2)
-}
+
 
 
   return (
 
-    <div className="taskList">
-          
+    <div className="taskList">         
       <div>
       <Header />
-     
-      
     <form >
-       
     <div className="container">
+      <div className="checks">
+      <input onChange={(event)=>{settaskNew(event.target.value)}}  className="agregar" type='text' 
+     value={taskNew}
 
-      <div className="checks"><input className="agregar" type='text' name='taskName' placeholder='Agrega una nueva tarea' /></div>
-      <div className="buttons"><BsPlusCircleFill className="icon"/></div> 
-
+      placeholder={"Agregar Tarea"}  /></div>
+      <div className="buttons" onClick={handleAddTask}><BsPlusCircleFill className="icon"/></div> 
       </div>  
     </form >
-    
 
-      {tasklistArray.map((task)=>
 
+      {tasklistArray.map((task,index)=>
+<div key={task.id} >
+
+<div className="container" >
  
-<div key={task} >
+      <div  className="checks" onClick={()=>checkTasks(task.index,task.isComplete)}><p>{index+1}.</p><input  checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(task.index,task.isComplete)}/> 
+      <p className={ `${checkedStatus? 'terminada':''}`}> {task.name}</p></div>
 
-<Task id={task.id} taskN={task.name} isComplete={task.isComplete} taskList={tasklistArray} pendingTask={pendingTask} completedTask={completedTask}/>
+    
+    <div className="buttons">
+      <div onClick={()=>handleUpdate(task.id)}><BsPencilFill className="icon" /></div>
+      <div onClick={()=>handleDelete(task.id)}><BsFillTrash3Fill className="icon"/></div>
+     </div>
 
+
+  </div>
  </div>
-
     )
 }
-
-
-<p>Tareas:{tasklistArray.length}, Terminadas:{completed} , Pendientes:{pending}</p>
+<p>Tareas:{tasklistArray.length}</p>
 <br></br>
 <button className="botonGrande">Eliminar las tareas terminadas</button>
 </div>
+
 </div>
    
   )

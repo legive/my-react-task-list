@@ -3,16 +3,15 @@
 /* eslint-disable no-unused-vars */
 //rafc para crear la estruxtura de una funcion
 import {useState, useEffect} from "react";
-import App from '../App.css'
+import { useActions } from "./hooks/useActions";
 import { BsPencilFill, BsFillTrash3Fill, BsPlusSquareFill } from "react-icons/bs";
 
 export default function Task ({id, taskN, isComplete, taskList, pendingTask, completedTask}) {
  
- const[taskArray, settaskArray]=useState(taskList)
- const [checkedStatus, setcheckedStatus]=useState(isComplete)
  
-  
-
+ const [checkedStatus, setcheckedStatus]=useState(isComplete)
+ const [tasklistArray, DeleteTask]=useActions();
+  const[taskArray, settaskArray]=useState(tasklistArray)
   
  useEffect(()=>{
     const taskData=JSON.stringify(taskArray)
@@ -42,6 +41,11 @@ const handleCompletedPendients=()=>{
   completedTask(completeCountC)
 
 }
+const handleDelete=(id)=>{
+
+ DeleteTask(id)
+
+}
 
   return (
    
@@ -54,7 +58,7 @@ const handleCompletedPendients=()=>{
     
     <div className="buttons">
       <div  ><BsPencilFill className="icon" /></div>
-      <div  ><BsFillTrash3Fill className="icon"/></div>
+      <div onClick={handleDelete(id)}><BsFillTrash3Fill className="icon"/></div>
      </div>
   
 
