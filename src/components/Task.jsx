@@ -6,7 +6,7 @@ import {useState, useEffect} from "react";
 import App from '../App.css'
 import { BsPencilFill, BsFillTrash3Fill, BsPlusSquareFill } from "react-icons/bs";
 
-export default function Task ({id, taskN, isComplete, taskList}) {
+export default function Task ({id, taskN, taskD, isComplete, taskList}) {
  
  const[taskArray, settaskArray]=useState(taskList)
  const [checkedStatus, setcheckedStatus]=useState(isComplete)
@@ -46,12 +46,12 @@ export default function Task ({id, taskN, isComplete, taskList}) {
     <div className="container" >
   
       <div key={id}  className="checks"><input checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(checkedStatus)}/> 
-      <p className={  `${checkedStatus? 'terminada':''}`}>{taskN}</p></div>
+      <p className={  `${checkedStatus? 'terminada':''}`}>{taskN} {taskD}</p></div>
 
     
     <div className="buttons">
-      <button  className="button"><BsPencilFill className="icon"/></button>
-      <button  className="deleteButton"><BsFillTrash3Fill className="icon"/></button>
+      <  ><BsPencilFill className="icon"/></>
+      <  ><BsFillTrash3Fill className="icon"/></>
   </div>
 
   

@@ -13,6 +13,7 @@
 }
 
 .taskList{
+  
   display: flex;
   justify-content: center;
   box-shadow: 0 0 10px 5px;
@@ -67,6 +68,18 @@
   background-color: rgb(240, 220, 231);
  
  }
+ .container
+ {
+  padding: 10px;
+
+ border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  width: 600px;
+  height: 50px;
+  box-shadow: black;
+ flex-direction: row;
+ }
  .container:hover{
   box-shadow: black;
   background-color:rgb(250, 244, 249);
@@ -81,21 +94,12 @@ p {
   font-size: 20px;
 }
 
- .container
- {
-  padding: 10px;
 
- border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  width: 400px;
-  height: 50px;
-  box-shadow: black;
- flex-direction: row;
- }
  .terminada{
   text-decoration:line-through;
  }
+
+ 
  .buttons{
   display: flex;
   gap:20%;
@@ -132,7 +136,7 @@ p {
   height: 40px;
  }
  .icon{
-  width: 50%;
+  width: 20%;
   height: 100%;
  
  }

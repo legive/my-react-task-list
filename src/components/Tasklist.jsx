@@ -90,9 +90,9 @@ settaskDescription('')
       {tasklistArray.map((task,index)=>
 <div key={task.id} >
 
-<div key={task} className="container">
+<div key={task} className="">
 
-<Task id={task.id} taskN={task.name} isComplete={task.isComplete} taskList={tasklistArray} />
+<Task id={task.id} taskN={task.name} taskD={task.taskDescription} isComplete={task.isComplete} taskList={tasklistArray} />
 
  
 </div>
