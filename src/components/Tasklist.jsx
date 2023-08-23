@@ -72,14 +72,17 @@ settaskNew('')
 
 <div className="container" >
  
-      <div  className="checks" onClick={()=>checkTasks(task.index,task.isComplete)}><p>{index+1}.</p><input  checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(task.index,task.isComplete)}/> 
+      {/* <div  className="checks" onClick={()=>checkTasks(task.index,task.isComplete)}><p>{index+1}.</p><input  checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(task.index,task.isComplete)}/> 
       <p className={ `${checkedStatus? 'terminada':''}`}> {task.name}</p></div>
 
     
     <div className="buttons">
       <div onClick={()=>handleUpdate(task.id)}><BsPencilFill className="icon" /></div>
       <div onClick={()=>handleDelete(task.id)}><BsFillTrash3Fill className="icon"/></div>
-     </div>
+     </div> */}
+     <Task id={task.id} taskN={task.name} isComplete={task.isComplete} taskList={tasklistArray}/>
+
+ 
 
 
   </div>

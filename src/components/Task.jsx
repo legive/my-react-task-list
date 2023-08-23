@@ -6,7 +6,7 @@ import {useState, useEffect} from "react";
 import { useActions } from "./hooks/useActions";
 import { BsPencilFill, BsFillTrash3Fill, BsPlusSquareFill } from "react-icons/bs";
 
-export default function Task ({id, taskN, isComplete, taskList, pendingTask, completedTask}) {
+export default function Task ({id, taskN, isComplete, taskList}) {
  
  
  const [checkedStatus, setcheckedStatus]=useState(isComplete)
@@ -28,19 +28,19 @@ export default function Task ({id, taskN, isComplete, taskList, pendingTask, com
    let index=taskArray.findIndex(task =>task.id == id);
    taskArray[index].complete=newState;
 
-  handleCompletedPendients()
+  //handleCompletedPendients()
 
 
    }
    
-const handleCompletedPendients=()=>{
+/* const handleCompletedPendients=()=>{
 
   const completeCountP=taskArray.filter(tarea=>tarea.isComplete==false).length
   const completeCountC=taskArray.filter(tarea=>tarea.isComplete==true).length
   pendingTask(completeCountP)
   completedTask(completeCountC)
 
-}
+} */
 const handleDelete=(id)=>{
 
  DeleteTask(id)
