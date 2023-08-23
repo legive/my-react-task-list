@@ -70,7 +70,7 @@ settaskNew('')
       {tasklistArray.map((task,index)=>
 <div key={task.id} >
 
-<div className="container" >
+<div className="" >
  
       {/* <div  className="checks" onClick={()=>checkTasks(task.index,task.isComplete)}><p>{index+1}.</p><input  checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(task.index,task.isComplete)}/> 
       <p className={ `${checkedStatus? 'terminada':''}`}> {task.name}</p></div>

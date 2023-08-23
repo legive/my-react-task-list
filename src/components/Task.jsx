@@ -3,15 +3,15 @@
 /* eslint-disable no-unused-vars */
 //rafc para crear la estruxtura de una funcion
 import {useState, useEffect} from "react";
-import { useActions } from "./hooks/useActions";
+import App from '../App.css'
 import { BsPencilFill, BsFillTrash3Fill, BsPlusSquareFill } from "react-icons/bs";
 
 export default function Task ({id, taskN, isComplete, taskList}) {
  
- 
+ const[taskArray, settaskArray]=useState(taskList)
  const [checkedStatus, setcheckedStatus]=useState(isComplete)
- const [tasklistArray, DeleteTask]=useActions();
-  const[taskArray, settaskArray]=useState(tasklistArray)
+ 
+
   
  useEffect(()=>{
     const taskData=JSON.stringify(taskArray)
@@ -41,30 +41,21 @@ export default function Task ({id, taskN, isComplete, taskList}) {
   completedTask(completeCountC)
 
 } */
-const handleDelete=(id)=>{
-
- DeleteTask(id)
-
-}
 
   return (
-   
- 
     <div className="container" >
- 
-      <div  className="checks" onClick={()=>checkTasks(checkedStatus)}><p>{id}.</p><input checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(checkedStatus)}/> 
-      <p className={ `${checkedStatus? 'terminada':''}`}>{taskN}</p></div>
+  
+      <div key={id}  className="checks"><input checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(checkedStatus)}/> 
+      <p className={  `${checkedStatus? 'terminada':''}`}>{taskN}</p></div>
 
     
     <div className="buttons">
-      <div  ><BsPencilFill className="icon" /></div>
-      <div onClick={handleDelete(id)}><BsFillTrash3Fill className="icon"/></div>
-     </div>
-  
-
+      <button  className="button"><BsPencilFill className="icon"/></button>
+      <button  className="deleteButton"><BsFillTrash3Fill className="icon"/></button>
   </div>
 
- 
+  
+  </div>
   
     )
 }
