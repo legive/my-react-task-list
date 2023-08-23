@@ -2,27 +2,39 @@
 /* eslint-disable no-unused-vars */
 //rafc para crear la estruxtura de una funcion
 
-import {useState, useEffect, useReducer, useContext} from "react";
+import {useState, useEffect} from "react";
 import { BsPlusCircleFill } from "react-icons/bs";
-import Task from './Task'
 import Header from './Header'
 import { useActions } from "./hooks/useActions";
 import { BsPencilFill, BsFillTrash3Fill, BsPlusSquareFill } from "react-icons/bs";
+import App from '../App.css'
+import Task from "./Task"
 
 export default function Tasklist () {
-
+  function handleSubmit(event) {
+    event.preventDefault();
+    
+   }
+ 
   const [taskNew, settaskNew]=useState("");
+  const [taskDescription, settaskDescription]=useState("");
   const [tasklistArray, addTask, deleteTask, updateTask]=useActions();
   const [checkedStatus, setcheckedStatus]=useState()
+  const[error, setError]=useState("");
+  
 
-
+  
 
  function handleAddTask()
   {
-   
-addTask(taskNew);
+    if (taskNew!="")
+    {addTask(taskNew, taskDescription);
+    setError("")}
+   else{setError("Ingrese una tarea")}
+
 
 settaskNew('')
+settaskDescription('')
 
 
   } 
@@ -39,10 +51,13 @@ settaskNew('')
   } 
 
   
- const checkTasks=(index, isComplete)=>{
-   const newState=!isComplete
+ const checkTasks=(index, isComplete2)=>{
+  console.log(index)
+   const newState=!isComplete2
    tasklistArray[index].isComplete=newState
+
    setcheckedStatus(newState)
+   
   
    }
 
@@ -51,50 +66,45 @@ settaskNew('')
 
 
   return (
-
+<form onSubmit={handleSubmit}>
     <div className="taskList">         
       <div>
       <Header />
     <form >
     <div className="container">
       <div className="checks">
+      
       <input onChange={(event)=>{settaskNew(event.target.value)}}  className="agregar" type='text' 
-     value={taskNew}
-
-      placeholder={"Agregar Tarea"}  /></div>
+     value={taskNew} placeholder={"Tarea"}  />
+     <input onChange={(event)=>{settaskDescription(event.target.value)}}  className="agregar" type='text' 
+     value={taskDescription} placeholder={"Descripción"}  />
+     </div>
+      
       <div className="buttons" onClick={handleAddTask}><BsPlusCircleFill className="icon"/></div> 
-      </div>  
+      
+      </div> 
+      <p style={{color:'red'}}>{error}</p> 
     </form >
 
 
       {tasklistArray.map((task,index)=>
 <div key={task.id} >
 
-<div className="" >
- 
-      {/* <div  className="checks" onClick={()=>checkTasks(task.index,task.isComplete)}><p>{index+1}.</p><input  checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(task.index,task.isComplete)}/> 
-      <p className={ `${checkedStatus? 'terminada':''}`}> {task.name}</p></div>
+<div key={task} className="container">
 
-    
-    <div className="buttons">
-      <div onClick={()=>handleUpdate(task.id)}><BsPencilFill className="icon" /></div>
-      <div onClick={()=>handleDelete(task.id)}><BsFillTrash3Fill className="icon"/></div>
-     </div> */}
-     <Task id={task.id} taskN={task.name} isComplete={task.isComplete} taskList={tasklistArray}/>
+<Task id={task.id} taskN={task.name} isComplete={task.isComplete} taskList={tasklistArray} />
 
  
-
-
-  </div>
+</div>
  </div>
     )
 }
-<p>Tareas:{tasklistArray.length}</p>
+<p>Tareas:{tasklistArray.length} Terminadas: Pendientes:</p>
 <br></br>
 <button className="botonGrande">Eliminar las tareas terminadas</button>
 </div>
 
 </div>
-   
+</form>
   )
 }
