@@ -57,42 +57,144 @@
   text-align: justify;
  }
 
- .checks
- {
-  display: flex;
-  align-items: center;
-  width: 80%;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  padding: 10px;
-  background-color: rgb(240, 220, 231);
+
+
+
+
  
- }
+
  .container
  {
   padding: 10px;
-
+  background-color:rgba(250, 244, 249, 0.418);
  border-radius: 10px;
   display: flex;
-  justify-content: center;
-  width: 600px;
-  height: 50px;
+   width: 600px;
+  height: auto;
   box-shadow: black;
- flex-direction: row;
+flex-direction: column;
+ word-wrap: break-word;
+ 
  }
- .container:hover{
+ .container2
+ {
+  padding: 10px;
+  background-color:rgba(250, 244, 249, 0.418);
+ border-radius: 10px;
+  display: flex;
+   width: 600px;
+  height: auto;
   box-shadow: black;
-  background-color:rgb(250, 244, 249);
+flex-direction: column;
+ word-wrap: break-word;
+ align-items: center;
+ }
+
+ .tarea
+ {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width:100%;
+  
+
+ }
+ .error{
+  display: flex;
+  flex-direction: row;
+  
+  height:30px;
+ }
+ .agregarTarea{
+  width: 90%;
+  
+ }
+ .input{
+  width:100;
+ }
+ .botonAgregar{
+  width: 10%;
+ 
+ }
+ .inputDescripcion{
+  
+  width: 100%;
+  height: 80px
+  
+ }
+ .containerTareas
+ {
+  padding: 10px;
+background-color:rgba(241, 214, 229, 0.658);
+ border-radius: 10px;
+  display: flex;
+  
+  width: 95%;
+  flex-direction: row;
+ align-items: center;
+
+ }
+ .containerTareas:hover{
+  box-shadow: black;
+  background-color:rgba(250, 244, 249, 0.521);
   border-radius: 10px;
   border:5px;
   opacity: 80%;
   
  }
+ .containerAllTask
+ {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 98%;
+ border-radius: 10px;
+  padding: 10px;
+  background-color: rgba(199, 73, 142, 0.233);
+  min-height: 50px;
+  height: auto;
+ 
+ 
+ }
+ .buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap:20%;
+  
+  width: 15%;
+  height: 90px;
+  
+ }
 
-p {
+
+
+
+ .tareaCheck{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+ 
+ }
+ .checkbox{
+  background-color: rgba(233, 132, 233, 0.308);
+  width: 5%;
+  display: flex;
+  flex-direction: row;
+ }
+ .tareaAgregada{
+  background-color: rgba(233, 132, 233, 0.308);
+ 
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+padding-left:5px;
+ }
+p, span, input, textarea {
   font-family: 'Edu QLD Beginner', cursive;
   font-size: 20px;
 }
+
 
 
  .terminada{
@@ -100,23 +202,13 @@ p {
  }
 
  
- .buttons{
-  display: flex;
-  gap:20%;
-  justify-content: center;
-  background-color: rgb(219, 118, 148);
-  width: 20%;
-  height: 100%;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
- }
+
  .agregar{
 
-  width: 90%;
-  height: 80%;
-  font-family: 'Edu QLD Beginner', cursive;
-  font-size: 20px;
-  
+  width: 98%;
+  height: 90%;
+  resize: none;
+ 
  }
 
  .button{
@@ -135,6 +227,19 @@ p {
   padding: 10px;
   height: 40px;
  }
+ .icon2{
+  width: 30px;
+  height: 100%;
+ 
+ }
+ .icon2:hover{
+  color: rgb(240, 47, 153);
+  
+ 
+ }
+
+
+
  .icon{
   width: 20%;
   height: 100%;
@@ -155,7 +260,7 @@ p {
   h1{
   font-family: 'Caveat', bold;
   font-size: 30px;
-  color: rgb(240, 47, 153);
+  color: rgb(199, 10, 114);
   text-decoration: double;
 
  }

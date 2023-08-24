@@ -23,16 +23,26 @@ export default function Tasklist () {
   const[error, setError]=useState("");
   
 
-  
+  useEffect(()=>{
+    
+
+    
+  if (taskNew!="")
+  {
+  setError("")}
+ else{setError("Ingrese una tarea")}
+
+ if (taskNew.length>3)
+  {
+  setError("")}
+ else{setError("La tarea debe contenes mas de 3 caracteres")}
+}, [taskNew] )
 
  function handleAddTask()
   {
-    if (taskNew!="")
-    {addTask(taskNew, taskDescription);
-    setError("")}
-   else{setError("Ingrese una tarea")}
+   
 
-
+    addTask(taskNew, taskDescription)
 settaskNew('')
 settaskDescription('')
 
@@ -72,31 +82,44 @@ settaskDescription('')
       <Header />
     <form >
     <div className="container">
-      <div className="checks">
       
-      <input onChange={(event)=>{settaskNew(event.target.value)}}  className="agregar" type='text' 
-     value={taskNew} placeholder={"Tarea"}  />
-     <input onChange={(event)=>{settaskDescription(event.target.value)}}  className="agregar" type='text' 
+      <div className="tarea">
+        <div className="agregarTarea"> <input onChange={(event)=>{settaskNew(event.target.value)}}  className="agregar" type='text' 
+             value={taskNew} placeholder={"Tarea"}  />
+        </div>
+        
+        <div className="botonAgregar" onClick={handleAddTask}><BsPlusCircleFill className="icon2"/>
+        </div> 
+      
+      
+      </div>
+
+      <div className="error"><span style={{color:'red'}}>{error}</span></div>
+     
+     
+      <div className="inputDescripcion">
+     <textarea onChange={(event)=>{settaskDescription(event.target.value)}}  className="agregar" type='textarea' 
      value={taskDescription} placeholder={"Descripción"}  />
+     
      </div>
       
-      <div className="buttons" onClick={handleAddTask}><BsPlusCircleFill className="icon"/></div> 
+      
       
       </div> 
-      <p style={{color:'red'}}>{error}</p> 
+    
     </form >
 
-
+     {/*tasklistArray.sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0))*/}
       {tasklistArray.map((task,index)=>
-<div key={task.id} >
+<div key={task.id} className="container2" >
 
-<div key={task} className="">
+{console.log("volvio a cargar")}
 
-<Task id={task.id} taskN={task.name} taskD={task.taskDescription} isComplete={task.isComplete} taskList={tasklistArray} />
+<Task id={task.id} taskN={task.name} taskD={task.description} isComplete={task.isComplete} taskList={tasklistArray} handleDelete={handleDelete} handleUpdate={handleUpdate} />
 
  
 </div>
- </div>
+
     )
 }
 <p>Tareas:{tasklistArray.length} Terminadas: Pendientes:</p>

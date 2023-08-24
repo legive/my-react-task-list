@@ -5,13 +5,15 @@
 import {useState, useEffect} from "react";
 import App from '../App.css'
 import { BsPencilFill, BsFillTrash3Fill, BsPlusSquareFill } from "react-icons/bs";
+import { useActions } from "./hooks/useActions";
 
-export default function Task ({id, taskN, taskD, isComplete, taskList}) {
+export default function Task ({id, taskN, taskD, isComplete, taskList, handleDelete, handleUpdate}) {
+  
+  const [taskNew, settaskNew]=useState("");
  
- const[taskArray, settaskArray]=useState(taskList)
  const [checkedStatus, setcheckedStatus]=useState(isComplete)
  
-
+ const[taskArray, settaskArray]=useState(taskList)
   
  useEffect(()=>{
     const taskData=JSON.stringify(taskArray)
@@ -27,11 +29,19 @@ export default function Task ({id, taskN, taskD, isComplete, taskList}) {
    taskArray[id-1].isComplete=newState
    let index=taskArray.findIndex(task =>task.id == id);
    taskArray[index].complete=newState;
-
   //handleCompletedPendients()
 
-
    }
+ /*   const handleDelete=(id)=>{
+    deleteTask(id)
+   
+    } */
+    
+ /*    const handleUpdate=(id)=>{
+        settaskNew(updateTask(id))
+    
+    
+    } */ 
    
 /* const handleCompletedPendients=()=>{
 
@@ -43,16 +53,31 @@ export default function Task ({id, taskN, taskD, isComplete, taskList}) {
 } */
 
   return (
-    <div className="container" >
+    <div className="containerTareas" >
   
-      <div key={id}  className="checks"><input checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(checkedStatus)}/> 
-      <p className={  `${checkedStatus? 'terminada':''}`}>{taskN} {taskD}</p></div>
+      <div key={id}  className="containerAllTask" >
+      
+      <div className="tareaCheck">
+        
+      <div className="checkbox"><input checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(checkedStatus)}/></div>
+      <div className="tareaAgregada"><p className={  `${checkedStatus? 'terminada':''}`}>{taskN} </p></div>
+      
+      
+       </div> 
+      
+      <div>
+        <p></p>
+        <h4>Descripción: {taskD}</h4></div>
+      </div>
+
+      <div className="buttons">
+      <div onClick={()=>handleUpdate(id)} ><BsPencilFill className="icon"/></div>
+      <div onClick={()=>handleDelete(id)}><BsFillTrash3Fill className="icon"/></div>
+              
+      </div>
 
     
-    <div className="buttons">
-      <  ><BsPencilFill className="icon"/></>
-      <  ><BsFillTrash3Fill className="icon"/></>
-  </div>
+    
 
   
   </div>

@@ -6,7 +6,7 @@ export  function useActions() {
     useEffect(()=>{
 
     const taskData=window.localStorage.getItem('taskItems')
-    console.log({taskData})
+    
          if (taskData!==null || taskData!=="")
          {
          settasklistArray(JSON.parse(taskData))
@@ -18,26 +18,38 @@ export  function useActions() {
      
   },[])  
 
+  
   useEffect(()=>{
     const taskData=JSON.stringify(tasklistArray)
     window.localStorage.setItem('taskItems',taskData)
 
     }, [tasklistArray] )  
 
- function addTask(taskNew)
- {const task2={name:taskNew, isComplete: false, id: crypto.randomUUID()}
- settasklistArray([...tasklistArray,task2]);
+
+
+ function addTask(taskNew, taskDescription)
+ {const newTask={name:taskNew, isComplete: false, id: Date.now(), description:taskDescription}
+ 
+ 
+ settasklistArray([...tasklistArray,newTask]);
+ //const sortestaskList= [...tasklistArray].sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0))
+
+ 
+/* //settasklistArray(sortestaskList);
+console.log(sortestaskList)
 console.log(tasklistArray)
+settasklistArray(sortestaskList);
+console.log(newTaskListArray) */
 }
 
 
  function deleteTask(id2){
-
+  console.log("Este es el id"+id2)
  const newTaskListArray=tasklistArray.filter((task)=>(task.id!==id2))
-
+ 
  settasklistArray(newTaskListArray);
-console.log(tasklistArray)
-
+ console.log(newTaskListArray)
+ console.log(tasklistArray)
 }
 
 function updateTask(id2){
