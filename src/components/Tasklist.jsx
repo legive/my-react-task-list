@@ -16,7 +16,9 @@ export default function Tasklist () {
     
    }
  
-  const [taskNew, settaskNew]=useState("");
+  const [taskName, settaskName]=useState("");
+  const [taskId, settaskId]=useState(Date.now());
+  const [taskCheck, settaskCheck]=useState(false);
   const [taskDescription, settaskDescription]=useState("");
   const [tasklistArray, addTask, deleteTask, updateTask]=useActions();
   const [checkedStatus, setcheckedStatus]=useState()
@@ -24,57 +26,53 @@ export default function Tasklist () {
   
 
   useEffect(()=>{
-    
-
-    
-  if (taskNew!="")
+  if (taskName=="")
   {
-  setError("")}
- else{setError("Ingrese una tarea")}
-
- if (taskNew.length>3)
+    setError("Ingrese una tarea")
+  }
+ else{
+  if (taskName.length>3)
   {
   setError("")}
  else{setError("La tarea debe contenes mas de 3 caracteres")}
-}, [taskNew] )
+ }
+}, [taskName] )
 
+function limpiar(){
+  settaskId(Date.now())
+  settaskName('')
+  settaskDescription('')
+  settaskCheck(false)
+}
  function handleAddTask()
   {
-   
+   const newTask={
+      id:taskId,
+      name:taskName,
+      description:taskDescription,
+      isComplete:taskCheck
 
-    addTask(taskNew, taskDescription)
-settaskNew('')
-settaskDescription('')
-
-
-  } 
-
-  const handleDelete=(id)=>{
-  deleteTask(id)
- 
-  }
-  
-  const handleUpdate=(id)=>{
-      settaskNew(updateTask(id))
-  console.log(taskNew)
+   };
+    addTask(newTask);
+    limpiar();
   
   } 
-
-  
- const checkTasks=(index, isComplete2)=>{
-  console.log(index)
-   const newState=!isComplete2
-   tasklistArray[index].isComplete=newState
-
-   setcheckedStatus(newState)
+  const handleUpdate=(id2)=>{
+    const index=tasklistArray.findIndex((task)=>(task.id===id2));
+    console.log(tasklistArray)
+    settaskId(tasklistArray[index].id);
+    settaskName(tasklistArray[index].name);
+    settaskDescription(tasklistArray[index].description);
+    settaskCheck(tasklistArray[index].isComplete);
+    deleteTask(id2);
    
-  
+
+  } 
+ const handleCheckUpdate=(id)=>{
+ const index=tasklistArray.findIndex((task)=>(task.id===id))
+ tasklistArray[index].isComplete=!tasklistArray[index].isComplete
+ setcheckedStatus(tasklistArray[index].isComplete) 
    }
-
-
-
-
-
   return (
 <form onSubmit={handleSubmit}>
     <div className="taskList">         
@@ -82,47 +80,36 @@ settaskDescription('')
       <Header />
     <form >
     <div className="container">
-      
-      <div className="tarea">
-        <div className="agregarTarea"> <input onChange={(event)=>{settaskNew(event.target.value)}}  className="agregar" type='text' 
-             value={taskNew} placeholder={"Tarea"}  />
+         <div className="tarea">
+        <div className="agregarTarea"> <input onChange={(event)=>{settaskName(event.target.value)}}  className="agregar" type='text' 
+             value={taskName} placeholder={"Tarea"}  />
         </div>
         
         <div className="botonAgregar" onClick={handleAddTask}><BsPlusCircleFill className="icon2"/>
         </div> 
-      
-      
       </div>
-
-      <div className="error"><span style={{color:'red'}}>{error}</span></div>
-     
-     
+      <div className="error"><span style={{color:'red'}}>{error}</span></div>    
       <div className="inputDescripcion">
      <textarea onChange={(event)=>{settaskDescription(event.target.value)}}  className="agregar" type='textarea' 
      value={taskDescription} placeholder={"Descripción"}  />
-     
+
      </div>
-      
-      
-      
       </div> 
     
     </form >
 
      {/*tasklistArray.sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0))*/}
-      {tasklistArray.map((task,index)=>
+      {tasklistArray.sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0)).map((task,index)=>
 <div key={task.id} className="container2" >
 
-{console.log("volvio a cargar")}
-
-<Task id={task.id} taskN={task.name} taskD={task.description} isComplete={task.isComplete} taskList={tasklistArray} handleDelete={handleDelete} handleUpdate={handleUpdate} />
+<Task id={task.id} taskN={task.name} taskD={task.description} isComplete={task.isComplete} taskList={tasklistArray} deleteTask={deleteTask} handleUpdate={handleUpdate} handleCheckUpdate={handleCheckUpdate} />
 
  
 </div>
 
     )
 }
-<p>Tareas:{tasklistArray.length} Terminadas: Pendientes:</p>
+<p>Tareas:{tasklistArray.length} Terminadas:{tasklistArray.filter((task)=>(task.isComplete===true)).length} Pendientes:{tasklistArray.filter((task)=>(task.isComplete===!true)).length}</p>
 <br></br>
 <button className="botonGrande">Eliminar las tareas terminadas</button>
 </div>

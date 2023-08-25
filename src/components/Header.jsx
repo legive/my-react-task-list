@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import pata from './pata.png'
+import pata from './img/pata.png'
 
 
 

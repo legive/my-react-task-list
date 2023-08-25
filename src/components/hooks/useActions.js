@@ -27,8 +27,7 @@ export  function useActions() {
 
 
 
- function addTask(taskNew, taskDescription)
- {const newTask={name:taskNew, isComplete: false, id: Date.now(), description:taskDescription}
+ function addTask(newTask){
  
  
  settasklistArray([...tasklistArray,newTask]);
