@@ -3,13 +3,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Edu+QLD+Beginner:wght@500&family=Permanent+Marker&display=swap');
 
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap');
+
+html{
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(rgb(15, 173, 221), pink);
+}
 #root {
   max-width: 100%;
   margin: 0 auto;
   padding: 2rem;
-  background: linear-gradient(rgb(15, 173, 221), pink);
   align-items: center;
- 
 }
 
 .taskList{
@@ -56,25 +62,36 @@
  ul{
   text-align: justify;
  }
-
-
-
-
-
- 
-
  .container
  {
   padding: 10px;
   background-color:rgba(250, 244, 249, 0.418);
  border-radius: 10px;
   display: flex;
-   width: 600px;
+   width: 1000px;
   height: auto;
   box-shadow: black;
-flex-direction: column;
- word-wrap: break-word;
+  flex-direction: column;
  
+ box-shadow: 0 0 10px 5px;
+ 
+ border-radius: 10px;
+ justify-content: center;
+ 
+ }
+ .addTask{
+  padding: 5px;
+  background-color:rgba(250, 244, 249, 0.418);
+ border-radius: 10px;
+  display: flex;
+   width: 90%;
+  height: auto;
+  box-shadow: black;
+  flex-direction: column;
+  justify-content: center;
+ box-shadow: 0 0 10px 5px;
+ padding: 20px;
+ border-radius: 10px;
  }
  .container2
  {
@@ -154,8 +171,7 @@ background-color:rgba(241, 214, 229, 0.658);
   background-color: rgba(199, 73, 142, 0.233);
   min-height: 50px;
   height: auto;
- 
- 
+
  }
  .buttons{
   display: flex;
@@ -167,10 +183,6 @@ background-color:rgba(241, 214, 229, 0.658);
   height: 90px;
   
  }
-
-
-
-
  .tareaCheck{
   display: flex;
   flex-direction: row;
@@ -192,7 +204,7 @@ background-color:rgba(241, 214, 229, 0.658);
 padding-left:5px;
  }
 p, span, input, textarea {
-  font-family: 'ArialD', cursive;
+  font-family: 'Raleway', sans-serif;
   font-size: 20px;
 }
 
@@ -253,14 +265,21 @@ p, span, input, textarea {
  .icon:hover{
   color: rgb(240, 47, 153);
  }
-
- h3{
-  font-family: 'Edu QLD Beginner';
+ h2{
+  color: rgb(139, 20, 86);
   font-size: 30px;
  }
 
+
+ h3{
+  text-align: justify;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+
+ }
+
   h1{
-  font-family: 'Caveat', bold;
+    font-family: 'Raleway', sans-serif;
   font-size: 30px;
   color: rgb(199, 10, 114);
   text-decoration: double;
@@ -271,7 +290,7 @@ p, span, input, textarea {
   }
 
  .botonGrande{
-  font-family: 'ArialD', cursive;
+  font-family: 'inherit', cursive;
   font-size: 20px;
   background-color: rgb(219, 118, 148);
   

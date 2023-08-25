@@ -1,83 +1,33 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-//rafc para crear la estruxtura de una funcion
-import {useState, useEffect} from "react";
-import App from '../App.css'
-import { BsPencilFill, BsFillTrash3Fill, BsPlusSquareFill } from "react-icons/bs";
-import { useActions } from "./hooks/useActions";
 
-export default function Task ({id, taskN, taskD, isComplete, taskList, deleteTask, handleUpdate, handleCheckUpdate}) {
-  
-  const [taskNew, settaskNew]=useState("");
+import {useState} from "react";
+import { BsPencilFill, BsFillTrash3Fill, BsTypeH3 } from "react-icons/bs";
+
+
+export default function Task ({id, taskN, taskD, isComplete, handleDeleteTask, handleUpdate, handleCheckUpdate}) {
+
+  const [checkedStatus, setcheckedStatus]=useState(isComplete)
  
- const [checkedStatus, setcheckedStatus]=useState(isComplete)
- 
- const[taskArray, settaskArray]=useState(taskList)
-  
- useEffect(()=>{
-    const taskData=JSON.stringify(taskArray)
-    window.localStorage.setItem('taskItems',taskData)
-
-    }, [ checkedStatus ]) 
-
-  
- const checkTasks=(isComplete)=>{
-   
+  const checkTasks=(isComplete)=>{
    const newState=!isComplete
    setcheckedStatus(newState)
    handleCheckUpdate(id)
- 
-
-   }
- /*   const handleDelete=(id)=>{
-    deleteTask(id)
-   
-    } */
-    
- /*    const handleUpdate=(id)=>{
-        settaskNew(updateTask(id))
-    
-    
-    } */ 
-   
-/* const handleCompletedPendients=()=>{
-
-  const completeCountP=taskArray.filter(tarea=>tarea.isComplete==false).length
-  const completeCountC=taskArray.filter(tarea=>tarea.isComplete==true).length
-  pendingTask(completeCountP)
-  completedTask(completeCountC)
-
-} */
-
+    }
   return (
     <div className="containerTareas" >
-  
       <div key={id}  className="containerAllTask" >
-      
       <div className="tareaCheck">
-        
       <div className="checkbox"><input checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(checkedStatus)}/></div>
-      <div className="tareaAgregada"><p className={  `${checkedStatus? 'terminada':''}`}>{taskN} </p></div>
-      
-      
-       </div> 
-      
+      <div className="tareaAgregada"><BsTypeH3 className={  `${checkedStatus? 'terminada':''}`}>{taskN} </BsTypeH3></div>
+       </div>
       <div>
-        <p></p>
-        <h4>Descripción:{id} {taskD}</h4></div>
+        
+        <p>{taskD}</p></div>
       </div>
-
       <div className="buttons">
       <div onClick={()=>handleUpdate(id)} ><BsPencilFill className="icon"/></div>
-      <div onClick={()=>deleteTask(id)}><BsFillTrash3Fill className="icon"/></div>
-              
+      <div onClick={()=>handleDeleteTask(id)}><BsFillTrash3Fill className="icon"/></div>   
       </div>
-
-    
-    
-
-  
   </div>
   
     )

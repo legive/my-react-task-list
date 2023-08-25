@@ -10,7 +10,8 @@ export default function Header(){
      
      <img src={pata}></img>
 
-        <h1>Mi lista de tareas</h1>
+        <h1>Te ayudo a organizarte?</h1>
+        <h2>Que tienes para hacer hoy?</h2>
         
     </div>
     )
