@@ -7,7 +7,7 @@ import App from '../App.css'
 import { BsPencilFill, BsFillTrash3Fill, BsPlusSquareFill } from "react-icons/bs";
 import { useActions } from "./hooks/useActions";
 
-export default function Task ({id, taskN, taskD, isComplete, taskList, handleDelete, handleUpdate}) {
+export default function Task ({id, taskN, taskD, isComplete, taskList, deleteTask, handleUpdate, handleCheckUpdate}) {
   
   const [taskNew, settaskNew]=useState("");
  
@@ -26,10 +26,11 @@ export default function Task ({id, taskN, taskD, isComplete, taskList, handleDel
    
    const newState=!isComplete
    setcheckedStatus(newState)
-   taskArray[id-1].isComplete=newState
+   
    let index=taskArray.findIndex(task =>task.id == id);
    taskArray[index].complete=newState;
-  //handleCompletedPendients()
+   handleCheckUpdate(id)
+ 
 
    }
  /*   const handleDelete=(id)=>{
@@ -67,12 +68,12 @@ export default function Task ({id, taskN, taskD, isComplete, taskList, handleDel
       
       <div>
         <p></p>
-        <h4>Descripción: {taskD}</h4></div>
+        <h4>Descripción:{id} {taskD}</h4></div>
       </div>
 
       <div className="buttons">
       <div onClick={()=>handleUpdate(id)} ><BsPencilFill className="icon"/></div>
-      <div onClick={()=>handleDelete(id)}><BsFillTrash3Fill className="icon"/></div>
+      <div onClick={()=>deleteTask(id)}><BsFillTrash3Fill className="icon"/></div>
               
       </div>
 
