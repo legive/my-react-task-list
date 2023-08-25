@@ -26,9 +26,6 @@ export default function Task ({id, taskN, taskD, isComplete, taskList, deleteTas
    
    const newState=!isComplete
    setcheckedStatus(newState)
-   
-   let index=taskArray.findIndex(task =>task.id == id);
-   taskArray[index].complete=newState;
    handleCheckUpdate(id)
  
 

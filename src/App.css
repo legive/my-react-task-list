@@ -107,6 +107,7 @@ flex-direction: column;
  }
  .agregarTarea{
   width: 90%;
+ 
   
  }
  .input{
@@ -191,7 +192,7 @@ background-color:rgba(241, 214, 229, 0.658);
 padding-left:5px;
  }
 p, span, input, textarea {
-  font-family: 'Edu QLD Beginner', cursive;
+  font-family: 'ArialD', cursive;
   font-size: 20px;
 }
 
@@ -208,6 +209,7 @@ p, span, input, textarea {
   width: 98%;
   height: 90%;
   resize: none;
+  border-radius: 8px;
  
  }
 
@@ -241,7 +243,7 @@ p, span, input, textarea {
 
 
  .icon{
-  width: 20%;
+  width: 80%;
   height: 100%;
  
  }
@@ -269,7 +271,7 @@ p, span, input, textarea {
   }
 
  .botonGrande{
-  font-family: 'Caveat', bold;
+  font-family: 'ArialD', cursive;
   font-size: 20px;
   background-color: rgb(219, 118, 148);
   
@@ -277,7 +279,7 @@ p, span, input, textarea {
  }
  
  .botonGrande:hover{
-  font-family: 'Caveat', bold;
+  font-family: 'ArialD', cursive;
   color: rgb(240, 47, 153);
   
   

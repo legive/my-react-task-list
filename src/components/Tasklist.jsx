@@ -15,15 +15,22 @@ export default function Tasklist () {
     event.preventDefault();
     
    }
- 
-  const [taskName, settaskName]=useState("");
+   useEffect(()=>{
+
+  
+    console.log({tasklistArray})
+    const taskPendients=tasklistArray.filter((task)=>(task.isComplete==false)).length
+    console.log(taskPendients)
+  },[]) 
+  const [taskName, settaskName]=useState("")
+ // const [taskPendients, settaskPendients]=useState("");
   const [taskId, settaskId]=useState(Date.now());
   const [taskCheck, settaskCheck]=useState(false);
   const [taskDescription, settaskDescription]=useState("");
-  const [tasklistArray, addTask, deleteTask, updateTask]=useActions();
+  const [tasklistArray, addTask, deleteTask, deleteCompletedTask, handleCheckUpdate, taskPendients, taskCompletes]=useActions();
   const [checkedStatus, setcheckedStatus]=useState()
   const[error, setError]=useState("");
-  
+  let pendientes=0;
 
   useEffect(()=>{
   if (taskName=="")
@@ -34,8 +41,11 @@ export default function Tasklist () {
   if (taskName.length>3)
   {
   setError("")}
- else{setError("La tarea debe contenes mas de 3 caracteres")}
+ else{setError("La tarea debe contener mas de 3 caracteres")}
  }
+
+
+
 }, [taskName] )
 
 function limpiar(){
@@ -44,6 +54,7 @@ function limpiar(){
   settaskDescription('')
   settaskCheck(false)
 }
+
  function handleAddTask()
   {
    const newTask={
@@ -51,29 +62,23 @@ function limpiar(){
       name:taskName,
       description:taskDescription,
       isComplete:taskCheck
-
    };
     addTask(newTask);
     limpiar();
   
-  } 
+  }
+  
   const handleUpdate=(id2)=>{
     const index=tasklistArray.findIndex((task)=>(task.id===id2));
-    console.log(tasklistArray)
+   
     settaskId(tasklistArray[index].id);
     settaskName(tasklistArray[index].name);
     settaskDescription(tasklistArray[index].description);
     settaskCheck(tasklistArray[index].isComplete);
     deleteTask(id2);
-   
-
-  } 
- const handleCheckUpdate=(id)=>{
- const index=tasklistArray.findIndex((task)=>(task.id===id))
- tasklistArray[index].isComplete=!tasklistArray[index].isComplete
- setcheckedStatus(tasklistArray[index].isComplete) 
-   }
-  return (
+    } 
+  
+   return (
 <form onSubmit={handleSubmit}>
     <div className="taskList">         
       <div>
@@ -109,9 +114,10 @@ function limpiar(){
 
     )
 }
-<p>Tareas:{tasklistArray.length} Terminadas:{tasklistArray.filter((task)=>(task.isComplete===true)).length} Pendientes:{tasklistArray.filter((task)=>(task.isComplete===!true)).length}</p>
+<span>Tareas:{tasklistArray.length} Terminadas:{taskCompletes} Pendientes:{taskPendients}</span>
 <br></br>
-<button className="botonGrande">Eliminar las tareas terminadas</button>
+
+<button onClick={deleteCompletedTask} className="botonGrande">Eliminar las tareas terminadas</button>
 </div>
 
 </div>

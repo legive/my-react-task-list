@@ -1,8 +1,14 @@
 import {useState, useEffect} from 'react'
 
 export  function useActions() {
-    const [tasklistArray, settasklistArray]=useState([])
+
+
    
+    const [tasklistArray, settasklistArray]=useState([])
+    
+     const[taskPendients, setTaskPendients] =useState(tasklistArray.filter((task)=>(task.isComplete==false)).length)
+     const[taskCompletes, settaskCompletes] =useState(tasklistArray.filter((task)=>(task.isComplete==true)).length)
+     
     useEffect(()=>{
 
     const taskData=window.localStorage.getItem('taskItems')
@@ -17,54 +23,50 @@ export  function useActions() {
             }
      
   },[])  
+  
 
   
   useEffect(()=>{
     const taskData=JSON.stringify(tasklistArray)
     window.localStorage.setItem('taskItems',taskData)
-
+    setTaskPendients(tasklistArray.filter((task)=>(task.isComplete==false)).length)
+    settaskCompletes(tasklistArray.filter((task)=>(task.isComplete==true)).length)
+  
     }, [tasklistArray] )  
-
+   
 
 
  function addTask(newTask){
- 
- 
  settasklistArray([...tasklistArray,newTask]);
- //const sortestaskList= [...tasklistArray].sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0))
 
- 
-/* //settasklistArray(sortestaskList);
-console.log(sortestaskList)
-console.log(tasklistArray)
-settasklistArray(sortestaskList);
-console.log(newTaskListArray) */
 }
+function updateCompletedPendients()
+{
+  setTaskPendients(tasklistArray.filter((task)=>(task.isComplete==false)).length)
+settaskCompletes(tasklistArray.filter((task)=>(task.isComplete==true)).length)
+}
+function deleteCompletedTask(){
 
+const newTaskListArray=tasklistArray.filter((task)=>(task.isComplete===false))
+settasklistArray(newTaskListArray)
+updateCompletedPendients()
+
+
+}
 
  function deleteTask(id2){
-  console.log("Este es el id"+id2)
  const newTaskListArray=tasklistArray.filter((task)=>(task.id!==id2))
- 
  settasklistArray(newTaskListArray);
- console.log(newTaskListArray)
- console.log(tasklistArray)
+ updateCompletedPendients()
 }
 
-function updateTask(id2){
+function handleCheckUpdate(id){
 
-    const newupdateTask=tasklistArray.filter((task)=>(task.id==id2))[0].name
+  let index=tasklistArray.findIndex(task =>task.id == id);
+  tasklistArray[index].isComplete=!tasklistArray[index].isComplete;
+  updateCompletedPendients()
+}
 
-    const newTaskListArray=tasklistArray.filter((task)=>(task.id!==id2))
-    settasklistArray(newTaskListArray);
-    console.log(newupdateTask)
-    return newupdateTask
-   
-   
-   }
+ return ([tasklistArray, addTask, deleteTask, deleteCompletedTask,handleCheckUpdate, taskPendients, taskCompletes])
  
-
-  return ([tasklistArray, addTask, deleteTask, updateTask])
-
-  
 }
