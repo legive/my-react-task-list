@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import {useState} from "react";
-import { BsPencilFill, BsFillTrash3Fill, BsTypeH3 } from "react-icons/bs";
+import { BsPencilFill, BsFillTrash3Fill } from "react-icons/bs";
 
 
 export default function Task ({id, taskN, taskD, isComplete, handleDeleteTask, handleUpdate, handleCheckUpdate}) {
@@ -18,7 +18,7 @@ export default function Task ({id, taskN, taskD, isComplete, handleDeleteTask, h
       <div key={id}  className="containerAllTask" >
       <div className="tareaCheck">
       <div className="checkbox"><input checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(checkedStatus)}/></div>
-      <div className="tareaAgregada"><BsTypeH3 className={  `${checkedStatus? 'terminada':''}`}>{taskN} </BsTypeH3></div>
+      <div className="tareaAgregada"><h3 className={  `${checkedStatus? 'terminada':''}`}>{taskN} </h3></div>
        </div>
       <div>
         

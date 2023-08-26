@@ -77,14 +77,15 @@ function limpiar(){
      <Header />
     <form className="addTask">
     
-         <div className="tarea">
+      <div className="tarea">
         <div className="agregarTarea"> <input onChange={(event)=>{settaskName(event.target.value)}}  className="agregar" type='text' 
-             value={taskName} placeholder={"Tarea"}  />
+             value={taskName} placeholder={"Tarea"} />
         </div>
-        
         <div className="botonAgregar" onClick={handleAddTask}><BsPlusCircleFill className="icon2"/>
         </div> 
       </div>
+
+
       <div className="error"><span style={{color:'red'}}>{error}</span></div>    
       <div className="inputDescripcion">
      <textarea onChange={(event)=>{settaskDescription(event.target.value)}}  className="agregar" type='textarea' 
@@ -97,7 +98,7 @@ function limpiar(){
 
      {/*tasklistArray.sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0))*/}
       {tasklistArray.sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0)).map((task)=>
-<div key={task.id} className="container2" >
+<div key={task.id} className="containerTareasmap" >
 
 <Task id={task.id} taskN={task.name} taskD={task.description} isComplete={task.isComplete} taskList={tasklistArray} handleDeleteTask={handleDeleteTask} handleUpdate={handleUpdate} handleCheckUpdate={handleCheckUpdate} />
 
@@ -106,7 +107,8 @@ function limpiar(){
 
     )
 }
-<span>Tareas:{tasklistArray.length} Terminadas:{taskCompletes} Pendientes:{taskPendients}</span>
+<br></br>
+<h3>Tareas:{tasklistArray.length} Terminadas:{taskCompletes} Pendientes:{taskPendients}</h3>
 <br></br>
 
 <button onClick={handleDeleteCompletedTask} className="botonGrande">Eliminar las tareas terminadas</button>

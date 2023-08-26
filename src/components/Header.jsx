@@ -11,7 +11,7 @@ export default function Header(){
      <img src={pata}></img>
 
         <h1>Te ayudo a organizarte?</h1>
-        <h2>Que tienes para hacer hoy?</h2>
+        <h2>Ingresa tus tareas para hoy</h2>
         
     </div>
     )
