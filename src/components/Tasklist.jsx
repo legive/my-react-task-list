@@ -19,9 +19,21 @@ export default function Tasklist () {
   const [taskCheck, settaskCheck]=useState(false);
   const [taskDescription, settaskDescription]=useState("");
   const[error, setError]=useState("");
-    
+  const[error2, setError2]=useState("");
+  const[error3, setError3]=useState("");
 
   useEffect(()=>{
+
+    setError2(taskDescription.length)
+    setError3(taskName.length)
+     if(taskDescription.length>=200){
+
+      alert("Sólo se permiten de 200 caracteres")
+     }
+   if(taskName.length>=50){
+
+      alert("Sólo se permiten de 50 caracteres")
+     }
   if (taskName=="")
   {
     setError("Ingrese una tarea")
@@ -32,7 +44,9 @@ export default function Tasklist () {
   setError("")}
  else{setError("La tarea debe contener mas de 3 caracteres")}
  }
-}, [taskName] )
+
+ 
+}, [taskName, taskDescription] )
 
 function limpiar(){
   settaskId(Date.now())
@@ -49,18 +63,30 @@ function limpiar(){
       description:taskDescription,
       isComplete:taskCheck
    };
+  
    if (taskName=="")
   {
     setError("Ingrese una tarea")
+    alert("Ingrese una tarea")
   }
   else if (taskName.length<=3){
     setError("La tarea debe contener mas de 3 caracteres")
+    alert("La tarea debe contener mas de 3 caracteres")
   }
-  else{
+  else if(taskDescription.length>=200){
+
+      alert("Sólo se permiten de 200 caracteres")
+     }
+     else if(taskName.length>=50){
+
+      alert("Sólo se permiten de 50 caracteres")
+     }
+     else{
     addTask(newTask);
     limpiar();
-  
-  }}
+  }
+
+}
   
   const handleUpdate=(id)=>{
     const index=tasklistArray.findIndex((task)=>(task.id===id));
@@ -86,13 +112,13 @@ function limpiar(){
       </div>
 
 
-      <div className="error"><span style={{color:'red'}}>{error}</span></div>    
+      <div className="error"><span style={{color:'red'}}>{error}                      {error3}</span></div>    
       <div className="inputDescripcion">
      <textarea onChange={(event)=>{settaskDescription(event.target.value)}}  className="agregar" type='textarea' 
      value={taskDescription} placeholder={"Descripción"}  />
 
      </div>
-   
+     <div className="error"><span style={{color:'red'}}>{error2}</span></div>
     
     </form >
 
