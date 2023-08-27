@@ -3,12 +3,12 @@ import "../App.css";
 function Menu() {
   return (
     <div>
-      <ul className="menu">
+      <ul className="menu" color="black">
         <li className="item-menu">
           <Link to={"/"}>Home</Link>
         </li>
         <li className="item-menu">
-          <Link to='/tareas'>Mis tareas</Link>
+          <Link to='/tareas'>Mis tareas diarias</Link>
         </li>
         <li className="item-menu">
           <Link to='/about'>Sobre Nosotros</Link>

@@ -19,10 +19,11 @@ function App() {
 
   return(
 
-    <div>
+    <div className=''>
     
     <BrowserRouter>
       <Menu />
+      <div className='containerAll'>
       <Suspense fallback={"Loading..."}>
       <Routes>
         <Route path="/" element={<Home/>} />
@@ -30,7 +31,7 @@ function App() {
         <Route path='/about' element={<SobreNosotros/>}/>
         </Routes>
       </Suspense>
-
+      </div>
     </BrowserRouter>
   </div>
  
