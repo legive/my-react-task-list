@@ -6,6 +6,8 @@ import { BsPencilFill, BsFillTrash3Fill } from "react-icons/bs";
 
 export default function Task ({id, taskN, taskD, isComplete, handleDeleteTask, handleUpdate, handleCheckUpdate}) {
 
+  
+
   const [checkedStatus, setcheckedStatus]=useState(isComplete)
  
   const checkTasks=(isComplete)=>{
@@ -17,7 +19,7 @@ export default function Task ({id, taskN, taskD, isComplete, handleDeleteTask, h
     <div className="containerTareas" >
       <div key={id}  className="containerAllTask" >
       <div className="tareaCheck">
-      <div className="checkbox"><input checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(checkedStatus)}/></div>
+      <div className="checkbox"><input className="check" checked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(checkedStatus)}/></div>
       <div className="tareaAgregada"><h3 className={  `${checkedStatus? 'terminada':''}`}>{taskN} </h3></div>
        </div>
       <div>

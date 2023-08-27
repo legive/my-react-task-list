@@ -1,13 +1,17 @@
 import {useState, useEffect, useReducer} from 'react'
 import {tasklistReducer} from '../tasklistReducer'
-
+import{Tareas} from '../Tareas'
 export  function useActions() {
 
 
 
-     const taskArrayInitial=[];
+     const taskArrayInitial=[Tareas];
+console.log(Tareas)
      const init = () => {
-      return JSON.parse(localStorage.getItem('taskList')) || []
+      if (Tareas=="")
+      {return JSON.parse(localStorage.getItem('taskList')) || []}
+      else{return Tareas}
+      
   }
      const [tasklistArray, dispatch] = useReducer(tasklistReducer, taskArrayInitial, init);
      const[taskPendients, setTaskPendients] =useState(0)
@@ -15,7 +19,7 @@ export  function useActions() {
     
      useEffect(() => {
       localStorage.setItem('taskList', JSON.stringify(tasklistArray))
-  }, [tasklistArray])  
+  }, [tasklistArray, taskPendients])  
   
 
   

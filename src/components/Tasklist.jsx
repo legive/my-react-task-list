@@ -23,7 +23,7 @@ export default function Tasklist () {
   const[error3, setError3]=useState("");
 
   useEffect(()=>{
-
+    
     setError2(taskDescription.length)
     setError3(taskName.length)
      if(taskDescription.length>=200){
@@ -44,9 +44,11 @@ export default function Tasklist () {
   setError("")}
  else{setError("La tarea debe contener mas de 3 caracteres")}
  }
+ 
+  
 
  
-}, [taskName, taskDescription] )
+}, [taskName, taskDescription, taskCheck, tasklistArray] )
 
 function limpiar(){
   settaskId(Date.now())
