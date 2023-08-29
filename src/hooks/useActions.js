@@ -6,10 +6,10 @@ export  function useActions() {
 
 
      const taskArrayInitial=[Tareas];
-console.log(Tareas)
      const init = () => {
-      if (Tareas=="")
-      {return JSON.parse(localStorage.getItem('taskList')) || []}
+      const arrayStorage=JSON.parse(localStorage.getItem('taskList'))
+      if (arrayStorage!="")
+      {return arrayStorage || []}
       else{return Tareas}
       
   }
