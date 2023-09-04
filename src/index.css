@@ -13,7 +13,9 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-
+html{
+  background-color: teal;
+}
 a {
   font-weight: 500;
   color: #681553;
@@ -29,6 +31,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: teal;
 }
 
 h1 {

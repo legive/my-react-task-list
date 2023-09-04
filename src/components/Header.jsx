@@ -1,19 +1,21 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import pata from './img/pata.png'
 
 
+import {
+      Center, Flex, Text
+  } from '@chakra-ui/react'
 
 export default function Header(){
     return(
-    <div className="containerHeader">
+    <Flex direction='column' alignItems='center' mb='50'>
      
-     <img src={pata}></img>
+    
 
-        <h1>Te ayudo a organizarte?</h1>
-        <h2>Ingresa tus tareas para hoy</h2>
+        <Text>Te ayudo a organizarte?</Text>
+        <Text>Ingresa tus tareas para hoy</Text>
         
-    </div>
+        </Flex>
     )
 
 

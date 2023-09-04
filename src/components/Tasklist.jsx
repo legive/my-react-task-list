@@ -2,10 +2,9 @@
 //rafc para crear la estruxtura de una funcion
 
 import {useState, useEffect} from "react";
-import { BsPlusCircleFill } from "react-icons/bs";
-import Header from './Header'
 import { useActions } from "../hooks/useActions";
 import Task from "./Task"
+import {Box, Flex, Button, FormControl,   Input, Textarea, Card,  StackDivider, CardBody, Text, Stack, Heading, Center} from '@chakra-ui/react'
 
 export default function Tasklist () {
   function handleSubmit(event) {
@@ -100,49 +99,83 @@ function limpiar(){
     } 
   
    return (
-<form onSubmit={handleSubmit} className="container">
-         
-     <Header />
-    <form className="addTask">
+
+    <Box w='100%' >
+
+
+      <Flex direction='column' justify='center' align='center'>  
+      <FormControl onSubmit={handleSubmit}>
+      <Center>
+     <Card w="100%" h="auto">
+     <CardBody   >
+    <Stack divider={<StackDivider />} spacing='4'>
+      <Box>
+        <Heading size='xs' textTransform='uppercase'>
+        <Stack spacing={5} direction='row' w='100%'>
+        
+         <Input onChange={(event)=>{settaskName(event.target.value)}}  type='text' 
+             value={taskName} placeholder={"Tarea"}/> 
+            
+         </Stack>
+        </Heading>
+        <Box align='left' color='red'>
+        <Text fontSize='15'>{error}</Text>
+        <Text fontSize='15'>{error3}</Text>
+        </Box>
+      </Box>
+
+      <Box>
+      <Text pt='2' fontSize='sm' align='left'>
+      <Textarea  onChange={(event)=>{settaskDescription(event.target.value)}}   type='text' 
+             value={taskDescription} placeholder={"Descripción"}/>
+        </Text>
+        <Box align='left' color='red' >
+               <Text fontSize='15'>{error2}</Text>
+        </Box>
+     
+        <Button mt='5' onClick={handleAddTask} colorScheme='pink' variant='solid'>
+ Agregar Tarea
+  </Button>
+      </Box>
+     
+    </Stack>
+  </CardBody>
+  </Card>
+  </Center>
+  
+</FormControl>
     
-      <div className="tarea">
-        <div className="agregarTarea"> <input onChange={(event)=>{settaskName(event.target.value)}}  className="agregar" type='text' 
-             value={taskName} placeholder={"Tarea"} />
-        </div>
-        <div className="botonAgregar" onClick={handleAddTask}><BsPlusCircleFill className="icon2"/>
-        </div> 
-      </div>
-
-
-      <div className="error"><span style={{color:'red'}}>{error}                      {error3}</span></div>    
-      <div className="inputDescripcion">
-     <textarea onChange={(event)=>{settaskDescription(event.target.value)}}  className="agregar" type='textarea' 
-     value={taskDescription} placeholder={"Descripción"}  />
-
-     </div>
-     <div className="error"><span style={{color:'red'}}>{error2}</span></div>
+      
     
-    </form >
+   
 
-     {/*tasklistArray.sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0))*/}
+    
       {tasklistArray.sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0)).map((task)=>
-<div key={task.id} className="containerTareasmap" >
+<Box key={task.id} className="" w='100%'>
 
 <Task id={task.id} taskN={task.name} taskD={task.description} isComplete={task.isComplete} taskList={tasklistArray} handleDeleteTask={handleDeleteTask} handleUpdate={handleUpdate} handleCheckUpdate={handleCheckUpdate} />
 
  
-</div>
+</Box>
 
     )
 }
 <br></br>
-<h3>Tareas:{tasklistArray.length} Terminadas:{taskCompletes} Pendientes:{taskPendients}</h3>
+<Heading as="h6"  size='md'>Tareas:{tasklistArray.length} Terminadas:{taskCompletes} Pendientes:{taskPendients}</Heading>
 <br></br>
 
-<button onClick={handleDeleteCompletedTask} className="botonGrande">Eliminar las tareas terminadas</button>
 
 
 
-</form>
+  <Button onClick={handleDeleteCompletedTask} colorScheme='pink' variant='solid'>
+  Eliminar las tareas terminadas
+  </Button>
+
+
+
+
+  </Flex> 
+
+</Box>
   )
 }
