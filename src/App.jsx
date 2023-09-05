@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 
-import './App.css'
+// import './App.css'
 import {Header2} from "./components/Header2";
-import { Menu } from "./components/Menu";
+import { MenuL } from "./components/MenuL";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { Suspense } from "react";
 import { useColorMode, Flex } from '@chakra-ui/react';
@@ -39,17 +39,21 @@ const {colorMode, toggleColorMode}=useColorMode();
     
     <BrowserRouter>
     <Grid templateColumns="repeat(6, 1fr)" gap={0}>
-          <GridItem colSpan={6} bg='blue'>
+    
+          <GridItem colSpan={6} bg='blue' >
           <Header2/>
          
           </GridItem>
+
+        
           <GridItem colSpan={1} >
-          <Box width="200px" >
-          <Menu/>
-              </Box>
+          <Box width="200px"  borderWidth={1}>
+          <MenuL/>
+          </Box>
           </GridItem>
           <GridItem colSpan={5}>
-          <Box width="100%" mt={200}>
+            
+          <Box width="100%" mt={200} borderWidth={1}>
           <Routes>
       
           <Route path="/" element={<Suspense fallback="loading..."><Home/></Suspense>} />
@@ -57,10 +61,18 @@ const {colorMode, toggleColorMode}=useColorMode();
     <Route path="/about" element={<Suspense fallback="loading..."><SobreNosotros/></Suspense>}/>
     
     </Routes>
+
+    
 </Box>
           </GridItem>
-          <GridItem colSpan={3} bg='teal'>
-            {/* Contenido del pie de página */}
+          <GridItem colSpan={6} >
+            <hr></hr>
+          <Box width="100%" borderWidth={0}>
+            <Center>
+          Derechos Reservados © 2023 por Leyla Vasquez
+          </Center>
+          <hr></hr>
+          </Box>
           </GridItem>
         </Grid>
        

@@ -27,11 +27,11 @@ export default function Tasklist () {
     setError3(taskName.length)
      if(taskDescription.length>=200){
 
-      alert("Sólo se permiten de 200 caracteres")
+      setError2("Sólo se permiten de 200 caracteres")
      }
    if(taskName.length>=50){
 
-      alert("Sólo se permiten de 50 caracteres")
+      setError3("Sólo se permiten de 50 caracteres")
      }
   if (taskName=="")
   {
@@ -68,19 +68,19 @@ function limpiar(){
    if (taskName=="")
   {
     setError("Ingrese una tarea")
-    alert("Ingrese una tarea")
+    //alert("Ingrese una tarea")
   }
   else if (taskName.length<=3){
     setError("La tarea debe contener mas de 3 caracteres")
-    alert("La tarea debe contener mas de 3 caracteres")
+    //alert("La tarea debe contener mas de 3 caracteres")
   }
   else if(taskDescription.length>=200){
 
-      alert("Sólo se permiten de 200 caracteres")
+    setError2("Sólo se permiten de 200 caracteres")
      }
      else if(taskName.length>=50){
 
-      alert("Sólo se permiten de 50 caracteres")
+      setError("Sólo se permiten de 50 caracteres")
      }
      else{
     addTask(newTask);
@@ -106,7 +106,7 @@ function limpiar(){
       <Flex direction='column' justify='center' align='center'>  
       <FormControl onSubmit={handleSubmit}>
       <Center>
-     <Card w="100%" h="auto">
+     <Card w="100%" h="auto" borderWidth={1}>
      <CardBody   >
     <Stack divider={<StackDivider />} spacing='4'>
       <Box>
@@ -118,9 +118,11 @@ function limpiar(){
             
          </Stack>
         </Heading>
-        <Box align='left' color='red'>
+        <Box align='left' color=' rgb(228, 150, 193);'>
+          <Flex gap='85%'>
         <Text fontSize='15'>{error}</Text>
         <Text fontSize='15'>{error3}</Text>
+        </Flex>
         </Box>
       </Box>
 
@@ -129,11 +131,11 @@ function limpiar(){
       <Textarea  onChange={(event)=>{settaskDescription(event.target.value)}}   type='text' 
              value={taskDescription} placeholder={"Descripción"}/>
         </Text>
-        <Box align='left' color='red' >
+        <Box align='right' color=' rgb(228, 150, 193);' >
                <Text fontSize='15'>{error2}</Text>
         </Box>
      
-        <Button mt='5' onClick={handleAddTask} colorScheme='pink' variant='solid'>
+        <Button mt='5' onClick={handleAddTask} colorScheme='teal' variant='solid'>
  Agregar Tarea
   </Button>
       </Box>
@@ -144,13 +146,11 @@ function limpiar(){
   </Center>
   
 </FormControl>
-    
+ 
       
     
-   
-
-    
-      {tasklistArray.sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0)).map((task)=>
+  
+{tasklistArray.sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0)).map((task)=>
 <Box key={task.id} className="" w='100%'>
 
 <Task id={task.id} taskN={task.name} taskD={task.description} isComplete={task.isComplete} taskList={tasklistArray} handleDeleteTask={handleDeleteTask} handleUpdate={handleUpdate} handleCheckUpdate={handleCheckUpdate} />
@@ -167,7 +167,7 @@ function limpiar(){
 
 
 
-  <Button onClick={handleDeleteCompletedTask} colorScheme='pink' variant='solid'>
+  <Button onClick={handleDeleteCompletedTask} colorScheme='teal' variant='solid'>
   Eliminar las tareas terminadas
   </Button>
 

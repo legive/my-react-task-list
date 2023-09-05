@@ -27,11 +27,7 @@
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
+
 
 
  */
@@ -52,23 +48,15 @@
   h1{
     font-family: 'Raleway', sans-serif;
   font-size: 30px;
-  color: rgb(199, 10, 114);
+  color: rgb(228, 150, 193);
   text-decoration: double;
 
  }
 
- h2{
-  color: rgb(139, 20, 86);
-  font-size: 30px;
- }
+
 
  
- h3{
-  text-align: justify;
-  font-family: 'Raleway', sans-serif;
-  font-size: 10px;
 
- }
 /*  body{
   max-width: 1200px;
   margin: 50px auto;

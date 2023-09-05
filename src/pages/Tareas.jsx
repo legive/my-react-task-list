@@ -10,17 +10,16 @@ export default function Tareas() {
 
 
   return (
-   <Box w='100%' mt={150}>
+   <Box w='100%' p={5}>
     
-    <Flex direction='column' alignItems='center' >
+    <Flex direction='column' alignItems='left' >
          
-   
+          {/*  <Heading as='h1'>Te ayudo a organizarte?</Heading> */}
 
-       {/*  <Heading as='h1'>Te ayudo a organizarte?</Heading> */}
-
-        <Heading as='h3' fontSize='20px'>Ingresa tus tareas para hoy</Heading>
-        <Tasklist/>
+        <Heading as='h1' fontSize='30px' mb={10} >Ingresa tus tareas para hoy</Heading>
         </Flex>
+        <Tasklist/>
+        
     
       </Box>
   )
