@@ -16,7 +16,7 @@ export default function Tareas() {
          
           {/*  <Heading as='h1'>Te ayudo a organizarte?</Heading> */}
 
-        <Heading as='h1' fontSize='30px' mb={10} >Ingresa tus tareas para hoy</Heading>
+        <Heading as='h1' fontSize='30px' mb={10}  >Ingresa tus tareas para hoy</Heading>
         </Flex>
         <Tasklist/>
         

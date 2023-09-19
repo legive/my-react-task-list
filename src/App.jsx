@@ -3,6 +3,7 @@
 // import './App.css'
 import {Header2} from "./components/Header2";
 import { MenuL } from "./components/MenuL";
+import { Feet } from "./components/Feet";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { Suspense } from "react";
 import { useColorMode, Flex } from '@chakra-ui/react';
@@ -39,14 +40,14 @@ const {colorMode, toggleColorMode}=useColorMode();
     
     <BrowserRouter>
     <Grid templateColumns="repeat(6, 1fr)" gap={0}>
-    
-          <GridItem colSpan={6} bg='blue' >
+   
+          <GridItem colSpan={6}  >
           <Header2/>
          
           </GridItem>
 
         
-          <GridItem colSpan={1} >
+          <GridItem colSpan={1}  >
           <Box width="200px"  borderWidth={1}>
           <MenuL/>
           </Box>
@@ -66,13 +67,7 @@ const {colorMode, toggleColorMode}=useColorMode();
 </Box>
           </GridItem>
           <GridItem colSpan={6} >
-            <hr></hr>
-          <Box width="100%" borderWidth={0}>
-            <Center>
-          Derechos Reservados © 2023 por Leyla Vasquez
-          </Center>
-          <hr></hr>
-          </Box>
+          <Feet/>
           </GridItem>
         </Grid>
        

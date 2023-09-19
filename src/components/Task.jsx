@@ -7,7 +7,7 @@ import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
 import { IconButton } from '@chakra-ui/react'
 
 
-export default function Task ({id, taskN, taskD, isComplete, handleDeleteTask, handleUpdate, handleCheckUpdate}) {
+export default function Task ({item, id, taskN, taskD, isComplete, handleDeleteTask, handleUpdate, handleCheckUpdate}) {
 
   
 
@@ -29,15 +29,15 @@ export default function Task ({id, taskN, taskD, isComplete, handleDeleteTask, h
 
          <Checkbox colorScheme='pink'  isChecked={checkedStatus}  type="checkbox" onChange={()=>checkTasks(checkedStatus)}>
          
-       <Flex direction='row' >
-         <Box w='800px' >
-           <Heading as='h3'  size='sm' w='100' className={`${checkedStatus? 'terminada':''}`}>{taskN} </Heading>
+       <Flex direction='row' gap={10} >
+         <Box w='750px' >
+           <Heading as='h3'  size='sm' w='100' className={`${checkedStatus? 'terminada':''}`}>{item}{taskN} </Heading>
           </Box>
          <Box >
           <Flex gap={2}>
            <IconButton colorScheme='teal' onClick={()=>handleUpdate(id)}  aria-label="Editar" icon={<EditIcon/>}  size="md" />
           
-           <IconButton colorScheme='pink' onClick={()=>handleDeleteTask(id)} aria-label="Editar" icon={<DeleteIcon/>}  size="md" /> 
+           <IconButton bg="#FED7E2" onClick={()=>handleDeleteTask(id)} aria-label="Editar" icon={<DeleteIcon/>}  size="md" /> 
            </Flex>
          </Box>
        </Flex>

@@ -9,7 +9,7 @@ function MenuL() {
    
     color="white"
     position="fixed"
-    top="180px"
+    top="250px"
     left={0}
     bottom={0}
     width="200px" 
@@ -25,12 +25,12 @@ function MenuL() {
     
    
      <Menu>
-      <Button as={Button}  w='200px' ><Link to={"/"}>Inicio</Link></Button>
+      <Button color="black" bg="#FED7E2" as={Button}  w='200px' ><Link to={"/"}>Inicio</Link></Button>
       
-      <Button as={Button}  w='200px'><Link to='/tareas'>Mis tareas diarias</Link></Button>
+      <Button  color="black" bg="#FED7E2" as={Button}  w='200px'><Link to='/tareas'>Mis tareas diarias</Link></Button>
      
-      <Button as={Button}  w='200px'><Link to='/about'>Sobre Nosotros</Link></Button>
-      
+      <Button  color="black" bg="#FED7E2" as={Button}  w='200px'><Link to='/about'>Sobre Nosotros</Link></Button>
+       
  
   
 </Menu>

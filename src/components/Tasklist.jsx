@@ -20,6 +20,7 @@ export default function Tasklist () {
   const[error, setError]=useState("");
   const[error2, setError2]=useState("");
   const[error3, setError3]=useState("");
+  const[activeButton, setActiveButton]=useState(true);
 
   useEffect(()=>{
     
@@ -28,20 +29,29 @@ export default function Tasklist () {
      if(taskDescription.length>=200){
 
       setError2("Sólo se permiten de 200 caracteres")
+      setActiveButton(false)
      }
    if(taskName.length>=50){
 
-      setError3("Sólo se permiten de 50 caracteres")
+      setError("Sólo se permiten de 50 caracteres")
+      setActiveButton(true)
      }
+     else{ setActiveButton(false)}
   if (taskName=="")
   {
-    setError("Ingrese una tarea")
+   // setError("Ingrese una tarea")
+    setActiveButton(true)
   }
  else{
   if (taskName.length>3)
   {
-  setError("")}
- else{setError("La tarea debe contener mas de 3 caracteres")}
+  setError("")
+  setActiveButton(false)
+}
+ else{
+  setError("La tarea debe contener mas de 3 caracteres")
+  setActiveButton(true)
+}
  }
  
   
@@ -67,24 +77,28 @@ function limpiar(){
   
    if (taskName=="")
   {
-    setError("Ingrese una tarea")
-    //alert("Ingrese una tarea")
+    //setError("Ingrese una tarea")
+    setActiveButton(true)
   }
   else if (taskName.length<=3){
     setError("La tarea debe contener mas de 3 caracteres")
-    //alert("La tarea debe contener mas de 3 caracteres")
+    setActiveButton(true)
   }
   else if(taskDescription.length>=200){
 
     setError2("Sólo se permiten de 200 caracteres")
+    setActiveButton(false)
      }
      else if(taskName.length>=50){
 
       setError("Sólo se permiten de 50 caracteres")
+      setActiveButton(true)
      }
      else{
+    setActiveButton(false)
     addTask(newTask);
     limpiar();
+   
   }
 
 }
@@ -118,10 +132,11 @@ function limpiar(){
             
          </Stack>
         </Heading>
-        <Box align='left' color=' rgb(228, 150, 193);'>
-          <Flex gap='85%'>
-        <Text fontSize='15'>{error}</Text>
-        <Text fontSize='15'>{error3}</Text>
+        <Box align='left' color=' rgb(228, 150, 193);' border='0px' width="100%">
+          <Flex >
+            <Box border='0px' width="97%"><Text fontSize='15'>{error}</Text></Box>
+            <Box border='0px' width="3%" justifyContent="Center" ><Text fontSize='15'>{error3}</Text></Box>
+       
         </Flex>
         </Box>
       </Box>
@@ -131,11 +146,15 @@ function limpiar(){
       <Textarea  onChange={(event)=>{settaskDescription(event.target.value)}}   type='text' 
              value={taskDescription} placeholder={"Descripción"}/>
         </Text>
-        <Box align='right' color=' rgb(228, 150, 193);' >
-               <Text fontSize='15'>{error2}</Text>
+        <Box align='left' color=' rgb(228, 150, 193);' border='0px' width="100%">
+          <Flex >
+            <Box border='0px' width="97%"><Text fontSize='15'></Text></Box>
+            <Box border='0px' width="3%" textAlign="left" ><Text fontSize='15'>{error2}</Text></Box>
+       
+        </Flex>
         </Box>
      
-        <Button mt='5' onClick={handleAddTask} colorScheme='teal' variant='solid'>
+        <Button mt='5' onClick={handleAddTask} colorScheme='teal' variant='solid' isDisabled={activeButton}>
  Agregar Tarea
   </Button>
       </Box>
@@ -153,7 +172,7 @@ function limpiar(){
 {tasklistArray.sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0)).map((task)=>
 <Box key={task.id} className="" w='100%'>
 
-<Task id={task.id} taskN={task.name} taskD={task.description} isComplete={task.isComplete} taskList={tasklistArray} handleDeleteTask={handleDeleteTask} handleUpdate={handleUpdate} handleCheckUpdate={handleCheckUpdate} />
+<Task item={task.index} id={task.id} taskN={task.name} taskD={task.description} isComplete={task.isComplete} taskList={tasklistArray} handleDeleteTask={handleDeleteTask} handleUpdate={handleUpdate} handleCheckUpdate={handleCheckUpdate} />
 
  
 </Box>
