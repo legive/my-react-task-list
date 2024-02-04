@@ -2,7 +2,7 @@
 
 // import './App.css'
 import { Header2 } from "./components/Header2";
-import { MenuL } from "./components/MenuL";
+import { MenuH } from "./components/MenuH";
 import { Feet } from "./components/Feet";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { Suspense } from "react";
@@ -21,56 +21,60 @@ function App() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Box w="1200px">
-      <Flex direction="column" alignItems="center">
-        <BrowserRouter>
-          <Grid templateColumns="repeat(6, 1fr)" gap={0}>
-            <GridItem colSpan={6}>
-              <Header2 />
-            </GridItem>
+    <Flex direction="column" mt="200px">
+      <BrowserRouter>
+        <Box>
+          {/* Encabezado */}
+          <Header2 />
 
-            <GridItem colSpan={1}>
-              <Box width="200px" borderWidth={1}>
-                <MenuL />
-              </Box>
-            </GridItem>
-            <GridItem colSpan={5}>
-              <Box width="100%" mt={200} borderWidth={1}>
-                <Routes>
-                  <Route
-                    path="/"
-                    element={
-                      <Suspense fallback="loading...">
-                        <Home />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/tareas"
-                    element={
-                      <Suspense fallback="loading...">
-                        <Tareas />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/about"
-                    element={
-                      <Suspense fallback="loading...">
-                        <SobreNosotros />
-                      </Suspense>
-                    }
-                  />
-                </Routes>
-              </Box>
-            </GridItem>
-            <GridItem colSpan={6}>
-              <Feet />
-            </GridItem>
-          </Grid>
-        </BrowserRouter>
-      </Flex>
-    </Box>
+        </Box>
+
+
+
+        <Box flex="1" mt={4} p={4}>
+          {/* Contenido principal */}
+
+          <Box>
+            {/* Menú Horizontal */}
+
+            <MenuH />
+
+          </Box>
+          <Routes>
+            <Route
+              path="/tasklist/"
+              element={
+                <Suspense fallback="loading...">
+                  <Home />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/tasklist/tareas"
+              element={
+                <Suspense fallback="loading...">
+                  <Tareas />
+                </Suspense>
+              }
+            />
+            <Route
+              path="/tasklist/about"
+              element={
+                <Suspense fallback="loading...">
+                  <SobreNosotros />
+                </Suspense>
+              }
+            />
+          </Routes>
+
+        </Box>
+
+        <Box>
+          {/* Pie de página */}
+          <Feet />
+        </Box>
+      </BrowserRouter>
+    </Flex>
   );
 }
 

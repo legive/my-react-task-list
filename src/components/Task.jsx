@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import { useState } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Center } from "@chakra-ui/react";
 import {
   Checkbox,
   Stack,
@@ -35,51 +35,60 @@ export default function Task({
     handleCheckUpdate(id);
   };
   return (
-    <Box w="100%">
-      <Card w="100%" h="auto" mt="10px" borderWidth={1}>
+    <Center>
+    <Box w="80vw" >
+      <Card w="auto" h="auto" mt="10px" borderWidth={1}>
         <CardBody>
           <Stack divider={<StackDivider />} spacing="2">
             <Box w="100%">
-              <Heading size="xs" textTransform="uppercase">
-                <Checkbox
-                  colorScheme="pink"
-                  isChecked={checkedStatus}
-                  type="checkbox"
-                  onChange={() => checkTasks(checkedStatus)}
-                >
-                  <Flex direction="row" gap={10}>
-                    <Box w="750px">
-                      <Heading
-                        as="h3"
-                        size="sm"
-                        w="100"
-                        className={`${checkedStatus ? "terminada" : ""}`}
+                <Flex direction="row" gap={2} >
+                                    
+                    <Box w="6%" >
+                      <Checkbox
+                        colorScheme="pink"
+                        isChecked={checkedStatus}
+                        type="checkbox"
+                        onChange={() => checkTasks(checkedStatus)}
+                        
                       >
-                        {item}- {taskN}{" "}
-                      </Heading>
-                    </Box>
-                    <Box>
+                      </Checkbox>
+                      </Box>
+                      <Box w="94%" >
                       <Flex gap={2}>
-                        <IconButton
-                          colorScheme="teal"
-                          onClick={() => handleUpdate(id)}
-                          aria-label="Editar"
-                          icon={<EditIcon />}
-                          size="md"
-                        />
+                        <Heading
+                          as="h3"
+                          size="sm"
+                          w="100%"
+                          className={`${checkedStatus ? "terminada" : ""}`}
+                          
+                        >
+                          {item}- {taskN}{" "}
+                        </Heading>
+                         {/* Botones de editar y eliminar */}
+                        <Box >
+                        <Flex gap={2}>
+                          <IconButton
+                            colorScheme="teal"
+                            onClick={() => handleUpdate(id)}
+                            aria-label="Editar"
+                            icon={<EditIcon />}
+                            size="md"                   />
 
-                        <IconButton
-                          bg="#FED7E2"
-                          onClick={() => handleDeleteTask(id)}
-                          aria-label="Editar"
-                          icon={<DeleteIcon />}
-                          size="md"
-                        />
+                          <IconButton
+                            bg="#FED7E2"
+                            onClick={() => handleDeleteTask(id)}
+                            aria-label="Editar"
+                            icon={<DeleteIcon />}
+                            size="md"
+                          />
+                        </Flex>
+                      </Box>
                       </Flex>
-                    </Box>
-                  </Flex>
-                </Checkbox>
-              </Heading>
+                      </Box>
+                     
+                      
+                    </Flex>
+                                            
             </Box>
 
             <Box>
@@ -91,5 +100,6 @@ export default function Task({
         </CardBody>
       </Card>
     </Box>
+    </Center>
   );
 }

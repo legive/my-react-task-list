@@ -10,24 +10,25 @@ function MenuL() {
       ml={6}
       color="white"
       position="fixed"
-      top="250px"
+      top="200"
       left={0}
       bottom={0}
-      width="200px"
+      width={{ base: "100%", md: "200px" }} // Ancho adaptativo
       zIndex={1}
+      bg="" // Color de fondo del menú
     >
-      <Flex direction="column" gap="10px" justify="center" align="center">
+      <Flex direction="row" gap="20px" justify="center" align="center">
         <Menu>
-          <Button color="black" bg="#FED7E2" as={Button} w="200px">
+          <Button color="black" bg="#FED7E2" as={Button} w="100%"> {/* Ancho adaptativo */}
             <Link to={"/"}>Inicio</Link>
           </Button>
 
-          <Button color="black" bg="#FED7E2" as={Button} w="200px">
+          <Button color="black" bg="#FED7E2" as={Button} w="100%"> {/* Ancho adaptativo */}
             <Link to="/tareas">Mis tareas diarias</Link>
           </Button>
 
-          <Button color="black" bg="#FED7E2" as={Button} w="200px">
-            <Link to="/about">Sobre Nosotros</Link>
+          <Button color="black" bg="#FED7E2" as={Button} w="100%"> {/* Ancho adaptativo */}
+            <Link to="/about">Sobre mi</Link>
           </Button>
         </Menu>
       </Flex>

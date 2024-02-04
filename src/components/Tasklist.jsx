@@ -113,7 +113,8 @@ export default function Tasklist() {
   };
 
   return (
-    <Box w="100%">
+    <Center>
+    <Box w="80vw" >
       <Flex direction="column" justify="center" align="center">
         <FormControl onSubmit={handleSubmit}>
           <Center>
@@ -226,5 +227,6 @@ export default function Tasklist() {
         </Button>
       </Flex>
     </Box>
+    </Center>
   );
 }

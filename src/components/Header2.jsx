@@ -1,4 +1,4 @@
-import { Box, Flex, Img } from "@chakra-ui/react";
+import { Box, Flex, Img, Center } from "@chakra-ui/react";
 //import header from '../img/header.jpg'; // Importa la imagen
 import header from "../img/header.jpg";
 import logo from "../img/logo.png";
@@ -8,6 +8,7 @@ import { useColorMode } from "@chakra-ui/react";
 function Header2() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
+
     <Box>
       <Box
         bgImage={`url(${header})`}
@@ -15,7 +16,7 @@ function Header2() {
         color="white"
         bgSize="cover"
         bgPosition="center"
-        w="100%"
+        w="100vw"
         h="200px"
         position="fixed"
         top={0}
@@ -48,11 +49,19 @@ function Header2() {
             </IconButton>
           </Flex>
         </Box>
-        <Flex justify="center">
-          <Img w="500px" src={logo}></Img>
-        </Flex>
+
+        <Box  w={'100%'} mt={'10px'} >
+          <Center>
+            <Flex justify={'Center'}>
+
+              <Img w="500px" src={logo}></Img>
+
+            </Flex>
+          </Center>
+        </Box>
       </Box>
     </Box>
+
   );
 }
 
