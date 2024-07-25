@@ -31,8 +31,8 @@ export default function Tasklist() {
     addTask,
     handleDeleteTask,
     handleDeleteCompletedTask,
-    UpdateTask,
     handleCheckUpdate,
+    UpdateTask,
     taskPendients,
     taskCompletes,
   ] = useActions();
@@ -95,22 +95,16 @@ export default function Tasklist() {
   }
 
   
-  function handleUpdate(id, taskNm, taskDesc, taskCk, taskDate) {
-    settaskId(id);
-    settaskName(taskNm);
-      settaskDescription(taskDesc);
-    settaskCheck(taskCk);
-    setToday(taskDate);
-
-    const newTask = {
-      id: taskId,
-      name: taskName,
-      description: taskDescription,
-      isComplete: taskCheck,
-      date: today,
+  function handleUpdate(id, updatedTask, taskDesc, taskCk, taskDate) {
+     const newTask = {
+      id: id,
+      name: updatedTask,
+      description: taskDesc,
+      isComplete: taskCk,
+      date: taskDate,
     };
-    console.log("nueva tarea",newTask)
-    //UpdateTask(newTask);
+    console.log("nueva tarea", newTask);
+    UpdateTask(newTask);
   }
 
   function handleAddTask() {
@@ -273,6 +267,7 @@ export default function Tasklist() {
                     a.isComplete === false ? -1 : b.isComplete === false ? 1 : 0
                   )
                   .filter((task) => task.isComplete == false)
+                  .sort((a, b) => new Date(a.date) - new Date(b.date))
 
                   .map((task, index) => (
                     <Box key={task.id} className="" w="100%">

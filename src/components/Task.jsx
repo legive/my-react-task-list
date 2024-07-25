@@ -12,7 +12,7 @@ import {
   CardBody,
   Text,
 } from "@chakra-ui/react";
-import { EditIcon, DeleteIcon } from "@chakra-ui/icons";
+import { EditIcon, DeleteIcon, CheckIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
 
 export default function Task({
@@ -31,8 +31,9 @@ export default function Task({
 
   const [checkedStatus, setcheckedStatus] = useState(isComplete);
   const [display, setDisplay] = useState("none");
-  const [displayTask, setDisplayTask] = useState("");
-  const [task, setTask] = useState(taskN);
+    const [displayTask, setDisplayTask] = useState("");
+  const [updatedTask, setupdatedTask] = useState(taskN);
+  const [today, setToday] = useState(date);
 
   const handleDisplay = () => {
     display ? setDisplay("") : setDisplay("none");
@@ -45,13 +46,24 @@ export default function Task({
      handleCheckUpdate(id);
    };
 
-  const handleUpdateTask = (e) => {
-    setTask(e.target.value);
+  const handleUpdatedTask = (e) => {
+    const ntexto=e.target.value
+    setupdatedTask(ntexto);
+    console.log("task actualizada",updatedTask)
   };
+    const handleClick = () => {
+    handleUpdate(id, updatedTask, taskD, checkedStatus, today);
+      setDisplay("none");
+      setDisplayTask("");
+  };
+   const handleDateChange = (event) => {
+     setToday(event.target.value);
+   };
+  
   return (
     <Center>
       <Box w="100%">
-        <Card w="auto" h="100px" mt="10px" borderWidth={1}>
+        <Card w="auto" h="120px" mt="10px" borderWidth={1}>
           <CardBody>
             <Stack divider={<StackDivider />} spacing="2">
               <Box w="100%">
@@ -68,7 +80,14 @@ export default function Task({
                         isChecked={checkedStatus}
                         type="checkbox"
                       >
-                        {date}
+                        <Text display={displayTask}>{date}</Text>
+                        <Input
+                          type="date"
+                          value={today}
+                          onChange={handleDateChange}
+                          required
+                          display={display}
+                        />
                       </Checkbox>
                     </Box>
 
@@ -86,26 +105,18 @@ export default function Task({
                         </Heading>
                         <Input
                           w="100%"
-                          value={task}
+                          value={updatedTask}
                           display={display}
-                          onChange={handleUpdateTask}
+                          onChange={handleUpdatedTask}
                         ></Input>
                         {/* Botones de editar y eliminar */}
                         <Box>
                           <Flex gap={2}>
                             <IconButton
                               colorScheme="red"
-                              onClick={() =>
-                                handleUpdate(
-                                  id,
-                                  task,
-                                  taskD,
-                                  checkedStatus,
-                                  date
-                                )
-                              }
+                              onClick={handleClick}
                               aria-label="Editar"
-                              icon={<EditIcon />}
+                              icon={<CheckIcon />}
                               size="md"
                               display={display}
                             />
