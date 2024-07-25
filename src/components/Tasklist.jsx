@@ -109,8 +109,8 @@ export default function Tasklist() {
       isComplete: taskCheck,
       date: today,
     };
-    console.log(newTask)
-    UpdateTask(newTask);
+    console.log("nueva tarea",newTask)
+    //UpdateTask(newTask);
   }
 
   function handleAddTask() {
@@ -276,7 +276,6 @@ export default function Tasklist() {
 
                   .map((task, index) => (
                     <Box key={task.id} className="" w="100%">
-                    
                       <Task
                         item={index + 1}
                         id={task.id}
@@ -313,7 +312,7 @@ export default function Tasklist() {
                         date={task.date}
                         taskList={tasklistArray}
                         handleDeleteTask={handleDeleteTask}
-                        UpdateTask={UpdateTask}
+                        handleUpdate={handleUpdate}
                         handleCheckUpdate={handleCheckUpdate}
                       />
                     </Box>
