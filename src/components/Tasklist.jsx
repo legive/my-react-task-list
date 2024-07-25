@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useActions } from "../hooks/useActions";
 import Task from "./Task";
+import TaskEnded from "./Task";
 import {
   Box,
   Flex,
@@ -17,6 +18,7 @@ import {
   Stack,
   Heading,
   Center,
+  Checkbox,
 } from "@chakra-ui/react";
 
 export default function Tasklist() {
@@ -29,10 +31,13 @@ export default function Tasklist() {
     addTask,
     handleDeleteTask,
     handleDeleteCompletedTask,
+    UpdateTask,
     handleCheckUpdate,
     taskPendients,
     taskCompletes,
   ] = useActions();
+
+  
   const [taskName, settaskName] = useState("");
   const [taskId, settaskId] = useState(Date.now());
   const [taskCheck, settaskCheck] = useState(false);
@@ -41,6 +46,19 @@ export default function Tasklist() {
   const [error2, setError2] = useState("");
   const [error3, setError3] = useState("");
   const [activeButton, setActiveButton] = useState(true);
+  
+  const [isChecked, setIsChecked] = useState(false);
+     
+  
+  const [today, setToday] = useState("");
+
+  useEffect(() => {
+    const currentDate = new Date().toLocaleDateString("en-CA");
+    setToday(currentDate);
+  }, []);
+  
+  
+  //const [taskDate, settaskDate] = useState("");
 
   useEffect(() => {
     setError2(taskDescription.length);
@@ -76,12 +94,32 @@ export default function Tasklist() {
     settaskCheck(false);
   }
 
+  
+  function handleUpdate(id, taskNm, taskDesc, taskCk, taskDate) {
+    settaskId(id);
+    settaskName(taskNm);
+      settaskDescription(taskDesc);
+    settaskCheck(taskCk);
+    setToday(taskDate);
+
+    const newTask = {
+      id: taskId,
+      name: taskName,
+      description: taskDescription,
+      isComplete: taskCheck,
+      date: today,
+    };
+    console.log(newTask)
+    UpdateTask(newTask);
+  }
+
   function handleAddTask() {
     const newTask = {
       id: taskId,
       name: taskName,
       description: taskDescription,
       isComplete: taskCheck,
+      date:today,
     };
 
     if (taskName == "") {
@@ -102,131 +140,207 @@ export default function Tasklist() {
       limpiar();
     }
   }
+  const handleChangeTask = (e) => {
 
-  const handleUpdate = (id) => {
-    const index = tasklistArray.findIndex((task) => task.id === id);
-    settaskId(tasklistArray[index].id);
-    settaskName(tasklistArray[index].name);
-    settaskDescription(tasklistArray[index].description);
-    settaskCheck(tasklistArray[index].isComplete);
-    handleDeleteTask(id);
+    //agregar la tarea wn mayuscula
+  settaskName(e.target.value.toUpperCase());
+  }
+
+  const handleChangeDescription = (e) => {
+    settaskDescription(e.target.value)
+  }
+
+    const handleDateChange = (event) => {
+      setToday(event.target.value);
+    };
+  
+
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
+    
   };
+  
+    const calculateCompletion = () => {
+      if (tasklistArray.length === 0) return 0;
+      return (taskCompletes * 100) / tasklistArray.length;
+    };
+  
+  
 
   return (
     <Center>
-    <Box w="80vw" >
-      <Flex direction="column" justify="center" align="center">
-        <FormControl onSubmit={handleSubmit}>
-          <Center>
-            <Card w="100%" h="auto" borderWidth={1}>
-              <CardBody>
-                <Stack divider={<StackDivider />} spacing="4">
-                  <Box>
-                    <Heading size="xs" textTransform="uppercase">
-                      <Stack spacing={5} direction="row" w="100%">
-                        <Input
-                          onChange={(event) => {
-                            settaskName(event.target.value);
-                          }}
-                          type="text"
-                          value={taskName}
-                          placeholder={"Tarea"}
-                        />
-                      </Stack>
-                    </Heading>
-                    <Box
-                      align="left"
-                      color=" rgb(228, 150, 193);"
-                      border="0px"
-                      width="100%"
-                    >
-                      <Flex>
-                        <Box border="0px" width="97%">
-                          <Text fontSize="15">{error}</Text>
-                        </Box>
-                        <Box border="0px" width="3%" justifyContent="Center">
-                          <Text fontSize="15">{error3}</Text>
-                        </Box>
-                      </Flex>
-                    </Box>
-                  </Box>
-
-                  <Box>
-                    <Text pt="2" fontSize="sm" align="left">
-                      <Textarea
-                        onChange={(event) => {
-                          settaskDescription(event.target.value);
-                        }}
+      <Box w="60vw">
+        <Flex direction="column" justify="center" align="center">
+          <FormControl onSubmit={handleSubmit}>
+            <Center>
+              <Card w="100%" h="auto" borderWidth={1}>
+                <CardBody>
+                  <Heading
+                    color={"rgb(228, 150, 193)"}
+                    size="lg"
+                    textTransform="uppercase"
+                  >
+                    Nueva tarea
+                  </Heading>
+                  <Stack divider={<StackDivider />} spacing="2">
+                    <Box>
+                      <Input
+                        onChange={handleChangeTask}
                         type="text"
-                        value={taskDescription}
-                        placeholder={"Descripción"}
+                        value={taskName}
+                        placeholder={"Titulo"}
                       />
-                    </Text>
-                    <Box
-                      align="left"
-                      color=" rgb(228, 150, 193);"
-                      border="0px"
-                      width="100%"
-                    >
-                      <Flex>
-                        <Box border="0px" width="97%">
-                          <Text fontSize="15"></Text>
-                        </Box>
-                        <Box border="0px" width="3%" textAlign="left">
-                          <Text fontSize="15">{error2}</Text>
-                        </Box>
-                      </Flex>
+
+                      <Box
+                        align="left"
+                        color=" rgb(228, 150, 193);"
+                        border="0px"
+                        width="100%"
+                      >
+                        <Flex>
+                          <Box border="0px" width="97%">
+                            <Text fontSize="15">{error}</Text>
+                          </Box>
+                          <Box border="0px" width="3%" justifyContent="Center">
+                            <Text fontSize="15">{error3}</Text>
+                          </Box>
+                        </Flex>
+                      </Box>
                     </Box>
 
-                    <Button
-                      mt="5"
-                      onClick={handleAddTask}
-                      colorScheme="teal"
-                      variant="solid"
-                      isDisabled={activeButton}
-                    >
-                      Agregar Tarea
-                    </Button>
-                  </Box>
-                </Stack>
-              </CardBody>
-            </Card>
-          </Center>
-        </FormControl>
+                    <Box>
+                      <Text pt="2" fontSize="sm" align="left">
+                        <Textarea
+                          onChange={handleChangeDescription}
+                          type="text"
+                          value={taskDescription}
+                          placeholder={"Descripción detallada"}
+                        />
+                      </Text>
 
-        {tasklistArray
-          .sort((a, b) => (a.id < b.id ? 1 : a.id > b.id ? -1 : 0))
-          .map((task, index) => (
-            <Box key={task.id} className="" w="100%">
-              <Task
-                item={index + 1}
-                id={task.id}
-                taskN={task.name}
-                taskD={task.description}
-                isComplete={task.isComplete}
-                taskList={tasklistArray}
-                handleDeleteTask={handleDeleteTask}
-                handleUpdate={handleUpdate}
-                handleCheckUpdate={handleCheckUpdate}
-              />
-            </Box>
-          ))}
-        <br></br>
-        <Heading as="h6" size="md">
-          Tareas:{tasklistArray.length} Terminadas:{taskCompletes} Pendientes:
-          {taskPendients}
-        </Heading>
-        <br></br>
+                      <Box
+                        align="left"
+                        color=" rgb(228, 150, 193);"
+                        border="0px"
+                        width="100%"
+                      >
+                        <Flex>
+                          <Box border="0px" width="97%">
+                            <Text fontSize="15"></Text>
+                          </Box>
+                          <Box border="0px" width="3%" textAlign="left">
+                            <Text fontSize="15">{error2}</Text>
+                          </Box>
+                        </Flex>
+                        <Flex flexDirection={"column"}>
+                          <Input
+                            type="date"
+                            value={today}
+                            onChange={handleDateChange}
+                            required
+                          />
+                          <Checkbox
+                            isChecked={isChecked}
+                            onChange={handleCheckboxChange}
+                          >
+                            Mostrar las tareas de hoy
+                          </Checkbox>
+                        </Flex>
+                      </Box>
 
-        <Button
-          onClick={handleDeleteCompletedTask}
-          colorScheme="teal"
-          variant="solid"
-        >
-          Eliminar las tareas terminadas
-        </Button>
-      </Flex>
-    </Box>
+                      <Button
+                        mt="5"
+                        onClick={handleAddTask}
+                        colorScheme="teal"
+                        variant="solid"
+                        isDisabled={activeButton}
+                      >
+                        Agregar
+                      </Button>
+                    </Box>
+                  </Stack>
+                </CardBody>
+              </Card>
+            </Center>
+          </FormControl>
+          <Box w="100%">
+            <Flex gap={10}>
+              <Box w="50%" border="2px" borderRadius="10px" padding="20px">
+                <Heading>Pendientes</Heading>
+                {tasklistArray
+
+                  .sort((a, b) =>
+                    a.isComplete === false ? -1 : b.isComplete === false ? 1 : 0
+                  )
+                  .filter((task) => task.isComplete == false)
+
+                  .map((task, index) => (
+                    <Box key={task.id} className="" w="100%">
+                    
+                      <Task
+                        item={index + 1}
+                        id={task.id}
+                        taskN={task.name}
+                        taskD={task.description}
+                        isComplete={task.isComplete}
+                        date={task.date}
+                        taskList={tasklistArray}
+                        handleDeleteTask={handleDeleteTask}
+                        handleUpdate={handleUpdate}
+                        handleCheckUpdate={handleCheckUpdate}
+                      />
+                    </Box>
+                  ))}
+              </Box>
+
+              <Box w="50%" border="2px" borderRadius="10px" padding="20px">
+                <Heading>Terminadas</Heading>
+                {tasklistArray
+
+                  .sort((a, b) =>
+                    a.isComplete === false ? -1 : b.isComplete === false ? 1 : 0
+                  )
+                  .filter((task) => task.isComplete == true)
+
+                  .map((task, index) => (
+                    <Box key={task.id} className="" w="100%">
+                      <TaskEnded
+                        item={index + 1}
+                        id={task.id}
+                        taskN={task.name}
+                        taskD={task.description}
+                        isComplete={task.isComplete}
+                        date={task.date}
+                        taskList={tasklistArray}
+                        handleDeleteTask={handleDeleteTask}
+                        UpdateTask={UpdateTask}
+                        handleCheckUpdate={handleCheckUpdate}
+                      />
+                    </Box>
+                  ))}
+              </Box>
+            </Flex>
+          </Box>
+
+          <br></br>
+          <Heading as="h6" size="md">
+            Tareas:{tasklistArray.length} Terminadas:{taskCompletes} Pendientes:
+            {taskPendients}
+          </Heading>
+          <Heading as="h6" size="lg">
+            El: {calculateCompletion().toFixed(2)}% de tu día ha sido completado
+          </Heading>
+          <br></br>
+
+          <Button
+            onClick={handleDeleteCompletedTask}
+            colorScheme="teal"
+            variant="solid"
+          >
+            Eliminar las tareas terminadas
+          </Button>
+        </Flex>
+      </Box>
     </Center>
   );
 }

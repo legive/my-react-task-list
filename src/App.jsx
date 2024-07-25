@@ -7,10 +7,8 @@ import { Feet } from "./components/Feet";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { Suspense } from "react";
 import { useColorMode, Flex } from "@chakra-ui/react";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { IconButton, Box, Center } from "@chakra-ui/react";
-import Tasklist from "./components/Tasklist";
-import { Grid, GridItem } from "@chakra-ui/react";
+import {  Box  } from "@chakra-ui/react";
+
 
 const Home = React.lazy(() => import("./pages/Home"));
 //const Tareas = React.lazy(() => import("./components/Tasklist"));
