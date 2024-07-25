@@ -39,12 +39,11 @@ export default function Task({
     displayTask ? setDisplayTask("") : setDisplayTask("none");
   };
 
-  const checkTasks = (isComplete) => {
-    const newState = !isComplete;
-    setcheckedStatus(newState);
-    handleCheckUpdate(id);
-  
-  };
+   const checkTasks = (isComplete) => {
+     const newState = !isComplete;
+     setcheckedStatus(newState);
+     handleCheckUpdate(id);
+   };
 
   const handleUpdateTask = (e) => {
     setTask(e.target.value);
