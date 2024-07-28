@@ -5,25 +5,22 @@ import "../App.css";
 
 function MenuH() {
   return (
-    <Box  w={'90vw'}>
-       <Center>
-      <Flex gap={'5'}>
-       
-        <Menu>
-          <Button as={Button} colorScheme='pink'>
+    <Box w={"90vw"}>
+      <Center>
+        <Flex gap={"5"}>
+          <Menu>
+            <Button as={Button} bgColor="#f8cbed">
               <Link to="/tasklist/">Inicio</Link>
-          </Button>
-          <Button as={Button} colorScheme='pink'>
+            </Button>
+            <Button as={Button} bgColor="#f8cbed">
               <Link to="/tasklist/tareas">Organiza tu día</Link>
-              </Button>
-           
-              <Button as={Button} colorScheme='pink'>
+            </Button>
+
+            <Button as={Button} bgColor="#f8cbed">
               <Link to="/tasklist/about">Sobre mí</Link>
-              </Button>
-          
-        </Menu>
-     
-      </Flex>
+            </Button>
+          </Menu>
+        </Flex>
       </Center>
     </Box>
   );

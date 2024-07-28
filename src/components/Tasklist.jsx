@@ -1,9 +1,6 @@
-//rafc para crear la estruxtura de una funcion
-
 import { useState, useEffect } from "react";
 import { useActions } from "../hooks/useActions";
 import Task from "./Task";
-import TaskEnded from "./Task";
 import {
   Box,
   Flex,
@@ -12,10 +9,8 @@ import {
   Input,
   Textarea,
   Card,
-  StackDivider,
   CardBody,
   Text,
-  Stack,
   Heading,
   Center,
   Checkbox,
@@ -37,7 +32,6 @@ export default function Tasklist() {
     taskCompletes,
   ] = useActions();
 
-  
   const [taskName, settaskName] = useState("");
   const [taskId, settaskId] = useState(Date.now());
   const [taskCheck, settaskCheck] = useState(false);
@@ -46,18 +40,17 @@ export default function Tasklist() {
   const [error2, setError2] = useState("");
   const [error3, setError3] = useState("");
   const [activeButton, setActiveButton] = useState(true);
-  
-  const [isChecked, setIsChecked] = useState(false);
-     
-  
+
+  const [isCheckedToday, setIsCheckedToday] = useState(false);
+
   const [today, setToday] = useState("");
 
   useEffect(() => {
     const currentDate = new Date().toLocaleDateString("en-CA");
     setToday(currentDate);
+    limpiar()
   }, []);
-  
-  
+
   //const [taskDate, settaskDate] = useState("");
 
   useEffect(() => {
@@ -94,9 +87,8 @@ export default function Tasklist() {
     settaskCheck(false);
   }
 
-  
   function handleUpdate(id, updatedTask, taskDesc, taskCk, taskDate) {
-     const newTask = {
+    const newTask = {
       id: id,
       name: updatedTask,
       description: taskDesc,
@@ -113,7 +105,7 @@ export default function Tasklist() {
       name: taskName,
       description: taskDescription,
       isComplete: taskCheck,
-      date:today,
+      date: today,
     };
 
     if (taskName == "") {
@@ -135,31 +127,26 @@ export default function Tasklist() {
     }
   }
   const handleChangeTask = (e) => {
-
     //agregar la tarea wn mayuscula
-  settaskName(e.target.value.toUpperCase());
-  }
+    settaskName(e.target.value.toUpperCase());
+  };
 
   const handleChangeDescription = (e) => {
-    settaskDescription(e.target.value)
-  }
-
-    const handleDateChange = (event) => {
-      setToday(event.target.value);
-    };
-  
-
-  const handleCheckboxChange = (event) => {
-    setIsChecked(event.target.checked);
-    
+    settaskDescription(e.target.value);
   };
-  
-    const calculateCompletion = () => {
-      if (tasklistArray.length === 0) return 0;
-      return (taskCompletes * 100) / tasklistArray.length;
-    };
-  
-  
+
+  const handleDateChange = (event) => {
+    setToday(event.target.value);
+  };
+
+  const handleCheckToday = (event) => {
+    setIsCheckedToday(event.target.checked);
+  };
+
+  const calculateCompletion = () => {
+    if (tasklistArray.length === 0) return 0;
+    return (taskCompletes * 100) / tasklistArray.length;
+  };
 
   return (
     <Center>
@@ -167,7 +154,7 @@ export default function Tasklist() {
         <Flex direction="column" justify="center" align="center">
           <FormControl onSubmit={handleSubmit}>
             <Center>
-              <Card w="100%" h="auto" borderWidth={1}>
+              <Card w="100%" h="auto" borderWidth={1} marginBottom={"10px"}>
                 <CardBody>
                   <Heading
                     color={"rgb(228, 150, 193)"}
@@ -176,90 +163,89 @@ export default function Tasklist() {
                   >
                     Nueva tarea
                   </Heading>
-                  <Stack divider={<StackDivider />} spacing="2">
-                    <Box>
-                      <Input
-                        onChange={handleChangeTask}
+
+                  <Box>
+                    <Input
+                      onChange={handleChangeTask}
+                      type="text"
+                      value={taskName}
+                      placeholder={"Titulo"}
+                    />
+
+                    <Box
+                      align="left"
+                      color=" rgb(228, 150, 193);"
+                      border="0px"
+                      width="100%"
+                    >
+                      <Flex>
+                        <Box border="0px" width="97%">
+                          <Text fontSize="15">{error}</Text>
+                        </Box>
+                        <Box border="0px" width="3%" justifyContent="Center">
+                          <Text fontSize="15">{error3}</Text>
+                        </Box>
+                      </Flex>
+                    </Box>
+                  </Box>
+
+                  <Box>
+                    <Text pt="2" fontSize="sm" align="left">
+                      <Textarea
+                        onChange={handleChangeDescription}
                         type="text"
-                        value={taskName}
-                        placeholder={"Titulo"}
+                        defaultValue={taskDescription}
+                        placeholder={"Descripción detallada"}
                       />
+                    </Text>
 
-                      <Box
-                        align="left"
-                        color=" rgb(228, 150, 193);"
-                        border="0px"
-                        width="100%"
-                      >
-                        <Flex>
-                          <Box border="0px" width="97%">
-                            <Text fontSize="15">{error}</Text>
-                          </Box>
-                          <Box border="0px" width="3%" justifyContent="Center">
-                            <Text fontSize="15">{error3}</Text>
-                          </Box>
-                        </Flex>
-                      </Box>
-                    </Box>
-
-                    <Box>
-                      <Text pt="2" fontSize="sm" align="left">
-                        <Textarea
-                          onChange={handleChangeDescription}
-                          type="text"
-                          value={taskDescription}
-                          placeholder={"Descripción detallada"}
+                    <Box
+                      align="left"
+                      color=" rgb(228, 150, 193);"
+                      border="0px"
+                      width="100%"
+                    >
+                      <Flex>
+                        <Box border="0px" width="97%">
+                          <Text fontSize="15"></Text>
+                        </Box>
+                        <Box border="0px" width="3%" textAlign="left">
+                          <Text fontSize="15">{error2}</Text>
+                        </Box>
+                      </Flex>
+                      <Flex flexDirection={"column"}>
+                        <Input
+                          type="date"
+                          value={today}
+                          onChange={handleDateChange}
+                          required
                         />
-                      </Text>
-
-                      <Box
-                        align="left"
-                        color=" rgb(228, 150, 193);"
-                        border="0px"
-                        width="100%"
-                      >
-                        <Flex>
-                          <Box border="0px" width="97%">
-                            <Text fontSize="15"></Text>
-                          </Box>
-                          <Box border="0px" width="3%" textAlign="left">
-                            <Text fontSize="15">{error2}</Text>
-                          </Box>
-                        </Flex>
-                        <Flex flexDirection={"column"}>
-                          <Input
-                            type="date"
-                            value={today}
-                            onChange={handleDateChange}
-                            required
-                          />
-                          <Checkbox
-                            isChecked={isChecked}
-                            onChange={handleCheckboxChange}
-                          >
-                            Mostrar las tareas de hoy
-                          </Checkbox>
-                        </Flex>
-                      </Box>
-
-                      <Button
-                        mt="5"
-                        onClick={handleAddTask}
-                        colorScheme="teal"
-                        variant="solid"
-                        isDisabled={activeButton}
-                      >
-                        Agregar
-                      </Button>
+                        <Checkbox
+                          isChecked={isCheckedToday}
+                          onChange={handleCheckToday}
+                        >
+                          Mostrar las tareas de hoy
+                        </Checkbox>
+                      </Flex>
                     </Box>
-                  </Stack>
+
+                    <Button
+                      mt="5"
+                      onClick={handleAddTask}
+                      colorScheme="teal"
+                      variant="solid"
+                      isDisabled={activeButton}
+                    >
+                      Agregar
+                    </Button>
+                  </Box>
                 </CardBody>
               </Card>
             </Center>
           </FormControl>
           <Box w="100%">
-            <Flex gap={10}>
-              <Box w="50%" border="2px" borderRadius="10px" padding="20px">
+            <Flex gap={10} flexDir={"column"}>
+              <Box w="100%" border="1px" borderRadius="10px" padding="20px">
                 <Heading>Pendientes</Heading>
                 {tasklistArray
 
@@ -267,11 +253,15 @@ export default function Tasklist() {
                     a.isComplete === false ? -1 : b.isComplete === false ? 1 : 0
                   )
                   .filter((task) => task.isComplete == false)
+                  .filter((task) =>
+                    isCheckedToday == true ? task.date == today : task.date
+                  )
                   .sort((a, b) => new Date(a.date) - new Date(b.date))
 
                   .map((task, index) => (
                     <Box key={task.id} className="" w="100%">
                       <Task
+                        background="none"
                         item={index + 1}
                         id={task.id}
                         taskN={task.name}
@@ -287,18 +277,20 @@ export default function Tasklist() {
                   ))}
               </Box>
 
-              <Box w="50%" border="2px" borderRadius="10px" padding="20px">
+              <Box w="100%" border="1px" borderRadius="10px" padding="20px">
                 <Heading>Terminadas</Heading>
                 {tasklistArray
 
                   .sort((a, b) =>
                     a.isComplete === false ? -1 : b.isComplete === false ? 1 : 0
                   )
+                  .sort((a, b) => new Date(a.date) - new Date(b.date))
                   .filter((task) => task.isComplete == true)
 
                   .map((task, index) => (
                     <Box key={task.id} className="" w="100%">
-                      <TaskEnded
+                      <Task
+                        background="#f8efed"
                         item={index + 1}
                         id={task.id}
                         taskN={task.name}
@@ -322,7 +314,8 @@ export default function Tasklist() {
             {taskPendients}
           </Heading>
           <Heading as="h6" size="lg">
-            El: {calculateCompletion().toFixed(2)}% de tu día ha sido completado
+            El: {calculateCompletion().toFixed(2)}% de tus tareas ha sido
+            completado
           </Heading>
           <br></br>
 

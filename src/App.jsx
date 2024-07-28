@@ -1,17 +1,13 @@
 /* eslint-disable no-unused-vars */
 
-// import './App.css'
 import { Header2 } from "./components/Header2";
 import { MenuH } from "./components/MenuH";
 import { Feet } from "./components/Feet";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { Suspense } from "react";
-import { useColorMode, Flex } from "@chakra-ui/react";
-import {  Box  } from "@chakra-ui/react";
-
+import { useColorMode, Flex, Box, Spinner } from "@chakra-ui/react";
 
 const Home = React.lazy(() => import("./pages/Home"));
-//const Tareas = React.lazy(() => import("./components/Tasklist"));
 const SobreNosotros = React.lazy(() => import("./pages/SobreNosotros"));
 const Tareas = React.lazy(() => import("./pages/Tareas"));
 
@@ -22,27 +18,15 @@ function App() {
     <Flex direction="column" mt="200px">
       <BrowserRouter>
         <Box>
-          {/* Encabezado */}
           <Header2 />
-
         </Box>
-
-
-
         <Box flex="1" mt={4} p={4}>
-          {/* Contenido principal */}
-
-          <Box>
-            {/* Menú Horizontal */}
-
-            <MenuH />
-
-          </Box>
+          <MenuH />
           <Routes>
             <Route
               path="/tasklist/"
               element={
-                <Suspense fallback="loading...">
+                <Suspense fallback={<Spinner />}>
                   <Home />
                 </Suspense>
               }
@@ -50,7 +34,7 @@ function App() {
             <Route
               path="/tasklist/tareas"
               element={
-                <Suspense fallback="loading...">
+                <Suspense fallback={<Spinner />}>
                   <Tareas />
                 </Suspense>
               }
@@ -58,17 +42,14 @@ function App() {
             <Route
               path="/tasklist/about"
               element={
-                <Suspense fallback="loading...">
+                <Suspense fallback={<Spinner />}>
                   <SobreNosotros />
                 </Suspense>
               }
             />
           </Routes>
-
         </Box>
-
         <Box>
-          {/* Pie de página */}
           <Feet />
         </Box>
       </BrowserRouter>

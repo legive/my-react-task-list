@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
-import { useState } from "react";
-import { Box, Center, Input } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
+import { Box, Center, Input, Link, FormControl } from "@chakra-ui/react";
 import {
   Checkbox,
   Stack,
@@ -11,15 +11,17 @@ import {
   StackDivider,
   CardBody,
   Text,
+  Textarea,
 } from "@chakra-ui/react";
 import { EditIcon, DeleteIcon, CheckIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
+// import MyModal from "./MyModal";
 
 export default function Task({
+  background,
   item,
   id,
   taskN,
-  // eslint-disable-next-line no-unused-vars
   taskD,
   isComplete,
   date,
@@ -27,46 +29,124 @@ export default function Task({
   handleUpdate,
   handleCheckUpdate,
 }) {
-  // Aquí almacenamos el número de tarea
-
+  // const { isOpen, onClose } = useDisclosure();
   const [checkedStatus, setcheckedStatus] = useState(isComplete);
   const [display, setDisplay] = useState("none");
-    const [displayTask, setDisplayTask] = useState("");
+  const [displayTask, setDisplayTask] = useState("");
+  const [displayD, setDisplayD] = useState("none");
   const [updatedTask, setupdatedTask] = useState(taskN);
+    const [updatedTaskD, setupdatedTaskD] = useState(taskD);
   const [today, setToday] = useState(date);
+  const [text, setText] = useState("Mostrar");
+    const [error, setError] = useState("");
+  const [error2, setError2] = useState("");
+   const [error3, setError3] = useState("");
+  const [error4, setError4] = useState("");
+  
+   useEffect(() => {
+     setError3(updatedTask.length);
+     setError4(updatedTaskD.length);
+     if (updatedTaskD.length >= 200) {
+       setError2("Sólo se permiten de 200 caracteres");
+      
+     }
+     if (updatedTask.length >= 50) {
+       setError("Sólo se permiten de 50 caracteres");
+   
+     }
+     if (!updatedTask == "") {
+       
+       if (updatedTask.length > 3) {
+         setError("");
+    
+       } else {
+         setError("La tarea debe contener mas de 3 caracteres");
+       
+       }
+     }
+   }, [updatedTask, updatedTaskD]);
+  
 
+
+
+    function handleSubmit(event) {
+      event.preventDefault();
+    }
   const handleDisplay = () => {
     display ? setDisplay("") : setDisplay("none");
     displayTask ? setDisplayTask("") : setDisplayTask("none");
   };
 
-   const checkTasks = (isComplete) => {
-     const newState = !isComplete;
-     setcheckedStatus(newState);
-     handleCheckUpdate(id);
-   };
+  const checkTasks = (isComplete) => {
+    const newState = !isComplete;
+    setcheckedStatus(newState);
+    handleCheckUpdate(id);
+  };
 
   const handleUpdatedTask = (e) => {
-    const ntexto=e.target.value
+    const ntexto = e.target.value;
     setupdatedTask(ntexto);
-    console.log("task actualizada",updatedTask)
+  
   };
-    const handleClick = () => {
-    handleUpdate(id, updatedTask, taskD, checkedStatus, today);
+
+    const handleUpdateDetails = (e) => {
+      const ntexto = e.target.value;
+      setupdatedTaskD(ntexto);
+
+    };
+
+  const handleClick = () => {
+
+    if (updatedTask == "") {
+      setError("Ingrese una tarea")
+      console.log(error);
+      
+    } else if (updatedTask.length <= 3) {
+      setError("La tarea debe contener mas de 3 caracteres");
+      console.log(error)
+     
+    } else if (updatedTaskD.length >= 200) {
+      setError2("Sólo se permiten de 200 caracteres");
+      console.log(error2)
+      
+    } else if (updatedTask.length >= 50) {
+      setError("Sólo se permiten de 50 caracteres");
+      console.log(error);
+    
+    } else {
+      console.log(updatedTaskD)
+      handleUpdate(id, updatedTask, updatedTaskD, checkedStatus, today);
       setDisplay("none");
       setDisplayTask("");
+      setError("");
+      setError2("");
+
+    }
+   
   };
-   const handleDateChange = (event) => {
-     setToday(event.target.value);
-   };
-  
+
+  const handleDateChange = (event) => {
+    setToday(event.target.value);
+  };
+
+  const handleText = () => {
+    text == "Mostrar" ? setText("Ocultar") : setText("Mostrar");
+    displayD == "" ? setDisplayD("none") : setDisplayD("");
+  };
+
   return (
     <Center>
       <Box w="100%">
-        <Card w="auto" h="120px" mt="10px" borderWidth={1}>
+        <Card
+          w="100%"
+          h="auto"
+          mt="10px"
+          borderWidth={1}
+          background={background}
+        >
           <CardBody>
             <Stack divider={<StackDivider />} spacing="2">
-              <Box w="100%">
+              <FormControl w="100%" onClick={handleSubmit}>
                 <Flex
                   direction="row"
                   gap={2}
@@ -103,15 +183,26 @@ export default function Task({
                         >
                           {item}- {taskN}{" "}
                         </Heading>
-                        <Input
-                          w="100%"
-                          value={updatedTask}
-                          display={display}
-                          onChange={handleUpdatedTask}
-                        ></Input>
+                        <Flex w="100%" flexDirection="column">
+                          <Input
+                            w="100%"
+                            value={updatedTask}
+                            display={display}
+                            onChange={handleUpdatedTask}
+                          ></Input>
+                          <Text fontSize="xs" color="red">
+                            {error}
+                          </Text>
+                          <Text display={display} fontSize="xs" color="red">
+                            {error3}
+                          </Text>
+                        </Flex>
                         {/* Botones de editar y eliminar */}
                         <Box>
-                          <Flex gap={2}>
+                          <Flex
+                            gap={2}
+                            direction={{ base: "column", md: "row" }}
+                          >
                             <IconButton
                               colorScheme="red"
                               onClick={handleClick}
@@ -140,9 +231,37 @@ export default function Task({
                         </Box>
                       </Flex>
                     </Box>
+                    <Link fontSize={"sm"} color={"pink"} onClick={handleText}>
+                      {text} detalles
+                    </Link>
+
+                    {/* <MyModal
+                      isOpen={isOpen}
+                      onClose={onClose}
+                      taskName={taskN}
+                      taskDescription={taskD}
+                      taskDate={today}
+                      taskState={isComplete}
+                    /> */}
+
+                    <Text display={displayD}>{taskD}</Text>
+                    <Flex w="100%" flexDirection="column">
+                      <Textarea
+                        textAlign={"justify"}
+                        display={display}
+                        value={updatedTaskD}
+                        onChange={handleUpdateDetails}
+                      ></Textarea>
+                      <Text fontSize="xs" color="red">
+                        {error2}
+                      </Text>
+                      <Text display={display} fontSize="xs" color="red">
+                        {error4}
+                      </Text>
+                    </Flex>
                   </Box>
                 </Flex>
-              </Box>
+              </FormControl>
 
               <Box>
                 <Text pt="2" fontSize="sm" align="left"></Text>
